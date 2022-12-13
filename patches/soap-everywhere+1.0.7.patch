@@ -1,0 +1,43 @@
+diff --git a/node_modules/soap-everywhere/lib/client.js b/node_modules/soap-everywhere/lib/client.js
+index 8e6904c..bab8c5a 100644
+--- a/node_modules/soap-everywhere/lib/client.js
++++ b/node_modules/soap-everywhere/lib/client.js
+@@ -93,7 +93,7 @@ Client.prototype._invoke = function(method, args, location, callback) {
+       SOAPAction: this.SOAPAction
+         ? this.SOAPAction(ns, name)
+         : (ns.lastIndexOf("/") != ns.length - 1 ? ns + "/" : ns) + name,
+-      "Content-Type": "text/xml; charset=utf-8"
++      
+     },
+     options = {},
+     alias = findKey(defs.xmlns, ns);
+diff --git a/node_modules/soap-everywhere/lib/http.js b/node_modules/soap-everywhere/lib/http.js
+index edb431b..e984bc7 100644
+--- a/node_modules/soap-everywhere/lib/http.js
++++ b/node_modules/soap-everywhere/lib/http.js
+@@ -9,12 +9,12 @@ var url = require("./url");
+ 
+ var VERSION = "0.2.0";
+ 
+-exports.request = function(rurl, data, callback, exheaders, exoptions) {
++exports.request = function(url, data, callback, exheaders, exoptions) {
+   var method = data ? "POST" : "GET";
+   var headers = {
+-    "User-Agent": "browser-soap/" + VERSION,
+-    Accept: "text/html,application/xhtml+xml,application/xml",
+-    "Content-Type": "application/x-www-form-urlencoded"
++    "access-control-allow-origin": "*",
++      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
++      'Access-Control-Allow-Methods': '*',
+   };
+ 
+   exheaders = exheaders || {};
+@@ -22,7 +22,7 @@ exports.request = function(rurl, data, callback, exheaders, exoptions) {
+     headers[attr] = exheaders[attr];
+   }
+ 
+-  fetch(rurl, {
++  fetch(url, {
+     method: method,
+     body: data,
+     headers: headers

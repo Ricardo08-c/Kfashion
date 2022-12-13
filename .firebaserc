@@ -1,0 +1,9 @@
+{
+  "projects": {
+    "default": "motica-dfa2b",
+    "MoticaServer": "moticadb",
+    "Motica": "motica-dfa2b"
+  },
+  "targets": {},
+  "etags": {}
+}

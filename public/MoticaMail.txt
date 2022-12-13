@@ -1,0 +1,4 @@
+Email de contacto de la empresa: contactmotica@gmail.com 
+Contrasenia: MoticaWEB01
+
+**Mismo usuario y contraseña para emailJs**

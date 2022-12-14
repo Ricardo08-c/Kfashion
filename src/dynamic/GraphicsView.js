@@ -177,7 +177,7 @@ class ReporteC extends React.Component {
     );
 
     return (
-      <div style={{ minHeight: "85%" }} className="text-white ">
+      <div style={{ minHeight: "85%" }} className=" ">
         {this.state.orders.length != 0 ? (
           <div style={{ marginLeft: "10%", maxWidth: "80%" }}>
             <br></br>
@@ -185,7 +185,7 @@ class ReporteC extends React.Component {
             <div className="  form-group">
               <label
                 style={{ display: "inline" }}
-                className="text-white"
+                className=""
                 htmlFor="name"
               >
                 Fecha de Inicio{" "}
@@ -201,7 +201,7 @@ class ReporteC extends React.Component {
               <li style={{ display: "inline", opacity: "0" }}>-----</li>
               <label
                 style={{ display: "inline" }}
-                className="text-white"
+                className=""
                 htmlFor="name"
               >
                 Fecha Fin{" "}

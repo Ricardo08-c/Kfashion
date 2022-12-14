@@ -123,9 +123,9 @@ class Orders extends React.Component {
     return (
       <div style={{ minHeight: "86%" }} className=" position-relative">
         <br></br>
-        <h3 class="text-white">Ordenes:</h3>
+        <h3 class="">Ordenes:</h3>
         <br></br>
-        <h5 style={{ display: "inline", left: "10%" }} class="text-white">
+        <h5 style={{ display: "inline", left: "10%" }} class="">
           Filtrar{" "}
         </h5>
         <select
@@ -159,18 +159,18 @@ class Orders extends React.Component {
               .map((filteredOrder) => (
                 <div>
                   <div>
-                    <h5 class="text-white">
+                    <h5 class="">
                       {"Orden #" + filteredOrder.props.index}
                     </h5>
-                    <h5 class="text-white">
+                    <h5 class="">
                       {"Numero de factura: " + filteredOrder.props.numFactura}
                     </h5>
-                    <h5 class="text-white">
+                    <h5 class="">
                       {"Estado: " + filteredOrder.props.estado}
                     </h5>
                     {!this.props.oneUser ? (
                       <div>
-                        <h5 class="text-white">
+                        <h5 class="">
                           {"Usuario que realiza la orden: " +
                             filteredOrder.props.objUser.nombre +
                             " " +
@@ -180,7 +180,7 @@ class Orders extends React.Component {
                     ) : (
                       <div></div>
                     )}
-                    <h5 class="text-white">
+                    <h5 class="">
                       {"Fecha en que se realizó la orden:  " +
                         filteredOrder.props.fecha +
                         ",   a las " +
@@ -195,7 +195,7 @@ class Orders extends React.Component {
               ))}
           </div>
         ) : (
-          <h2 class="text-white">Cargando...</h2>
+          <h2 class="">Cargando...</h2>
         )}
       </div>
     );
@@ -308,28 +308,28 @@ class Order extends React.Component {
   render() {
     return (
       <div style={{ marginLeft: "15%", maxWidth: "70%" }}>
-        <table class="table table-bordered">
+        <table class="table table-bordered border-dark">
           <thead class="thead-dark">
             <tr>
-              <th class="text-white" scope="col">
+              <th class="" scope="col">
                 Producto
               </th>
-              <th class="text-white" scope="col">
+              <th class="" scope="col">
                 Nombre
               </th>
-              <th class="text-white" scope="col">
+              <th class="" scope="col">
                 Descripcion
               </th>
-              <th class="text-white" scope="col">
+              <th class="" scope="col">
                 Precio unitario
               </th>
-              <th class="text-white" scope="col">
+              <th class="" scope="col">
                 Cantidad
               </th>
-              <th class="text-white" scope="col">
+              <th class="" scope="col">
                 Descuento
               </th>
-              <th class="text-white" scope="col">
+              <th class="" scope="col">
                 Total de precios unitarios
               </th>
             </tr>
@@ -371,7 +371,7 @@ class Order extends React.Component {
               <td></td>
               <td></td>
 
-              <td class="text-white">{"TOTAL:  $" + this.state.totalSum}</td>
+              <td class="">{"TOTAL:  $" + this.state.totalSum}</td>
             </tr>
           </tbody>
         </table>

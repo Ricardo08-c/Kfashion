@@ -76,7 +76,7 @@ function BannerBuild() {
   if (promos.length === 0)
     return (
       <div className="position-relative" style={{ minHeight: "100%" }}>
-        <h2 className="text-white ">Cargando...</h2>
+        <h2 className=" ">Cargando...</h2>
       </div>
     );
 

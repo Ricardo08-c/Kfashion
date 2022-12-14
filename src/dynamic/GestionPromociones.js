@@ -391,6 +391,7 @@ function Gestion() {
             <select onChange={(e) => updateForm({ producto: e.target.value })}>
               {console.log("asd")}
               {console.log(products)}
+              <option></option>
               {products.map((product) => product)}
             </select>
             <br />

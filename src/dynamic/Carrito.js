@@ -352,7 +352,7 @@ class Carrito extends React.Component {
                 <br></br>
 
                 <div style={{ marginLeft: "15%", maxWidth: "70%" }}>
-                  <table class="table table-bordered">
+                  <table class="table table-bordered border-dark">
                     <thead class="thead-dark">
                       <tr>
                         <th scope="col">Producto</th>

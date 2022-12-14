@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -7,15 +7,11 @@ import {
   Title,
   Tooltip,
   Legend,
-} from 'chart.js';
-import { Bar } from 'react-chartjs-2';
-
-
-
+} from "chart.js";
+import { Bar } from "react-chartjs-2";
 
 function Baras(options, data) {
-  return <Bar  
-   options={options} data={data}   />;
+  return <Bar options={options} data={data} />;
 }
 
 export default Baras;

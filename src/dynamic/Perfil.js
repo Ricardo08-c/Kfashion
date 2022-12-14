@@ -48,12 +48,12 @@ class ProfileComponent extends React.Component {
     return (
       <div style={{ minHeight: "100%" }} className="m-4">
         <img src={this.props.imgSrc} width="400" height={"300"} alt="Profile" />
-        <div className="text-success">
+        <div className="">
           <h2 className="card-title">
             {this.props.name} {this.props.apellido}
           </h2>
           <br />
-          <div className="text-white">
+          <div className="">
             <h4>Correo: {this.props.email}</h4>
             <h4>Sexo: {this.props.sexo}</h4>
             <h4>Rol: {this.props.rol}</h4>
@@ -115,7 +115,7 @@ function ProfileBuild() {
   if (persons.length == 0) {
     return (
       <div className="position-relative" style={{ minHeight: "100%" }}>
-        <h2 className="text-white ">Cargando...</h2>
+        <h2 className=" ">Cargando...</h2>
       </div>
     );
   }

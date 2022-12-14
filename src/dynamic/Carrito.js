@@ -135,6 +135,7 @@ class CatalogComponent extends React.Component {
 }
 
 function RegistrarVenta(newOrder) {
+  
   var soap = require("soap-everywhere");
   var url = "https://mora.tk/service/xml/facturar.php?wsdl";
 
@@ -348,32 +349,32 @@ class Carrito extends React.Component {
             {this.state.totalSum != 0 ? (
               <div style={{ minHeight: "86%" }} className="position-relative">
                 <br></br>
-                <h2 class="text-white">Resumen del carrito de compras:</h2>
+                <h2 >Resumen del carrito de compras:</h2>
                 <br></br>
 
                 <div style={{ marginLeft: "15%", maxWidth: "70%" }}>
                   <table class="table table-bordered">
                     <thead class="thead-dark">
                       <tr>
-                        <th class="text-white" scope="col">
+                        <th  scope="col">
                           Producto
                         </th>
-                        <th class="text-white" scope="col">
+                        <th  scope="col">
                           Nombre
                         </th>
-                        <th class="text-white" scope="col">
+                        <th  scope="col">
                           Descripcion
                         </th>
-                        <th class="text-white" scope="col">
+                        <th  scope="col">
                           Precio unitario
                         </th>
-                        <th class="text-white" scope="col">
+                        <th  scope="col">
                           Cantidad
                         </th>
-                        <th class="text-white" scope="col">
+                        <th c scope="col">
                           Descuento
                         </th>
-                        <th class="text-white" scope="col">
+                        <th scope="col">
                           Total de precios unitarios
                         </th>
                       </tr>
@@ -382,14 +383,14 @@ class Carrito extends React.Component {
                     <tbody>
                       {this.productsToCart().map((data) => data)}
 
-                      <tr class="border border-dark">
+                      <tr class="">
                         <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td class="text-white">
+                        <td >
                           {"TOTAL:  $" + this.state.totalSum}
                         </td>
                       </tr>
@@ -407,7 +408,7 @@ class Carrito extends React.Component {
                         >
                           Continuar editando +
                         </button>
-                        <li class="text-dark" style={{ display: "inline" }}>
+                        <li class="text-dark" style={{ opacity:0,display: "inline" }}>
                           {" "}
                           --
                         </li>
@@ -439,7 +440,7 @@ class Carrito extends React.Component {
             ) : (
               <div style={{ minHeight: "100%" }} className="position-relative">
                 <br></br>
-                <h2 class="text-white">
+                <h2 >
                   Ups.. parece que no tienes productos añadidos en el carrito
                 </h2>
                 <br></br>

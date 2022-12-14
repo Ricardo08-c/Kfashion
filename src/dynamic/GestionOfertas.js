@@ -371,18 +371,18 @@ function Gestion() {
 
   return (
     <div className="position-relative" style={{ minHeight: "100%" }}>
-      <h2 className="text-white">Gestion de ofertas</h2>
+      <h2 >Gestion de ofertas</h2>
       <div style={{ overflow: "hidden" }}>
         <form style={{ float: "none" }}>
           <div className="">
-            <label className="text-white">Descripcion de la promocion</label>
+            <label >Descripcion de la promocion</label>
             <br />
             <input
               value={form.descripcion}
               onChange={(e) => updateForm({ descripcion: e.target.value })}
             ></input>
             <br />
-            <label className="text-white">Fecha Inicio</label>
+            <label >Fecha Inicio</label>
             <br />
             <input
               type="date"
@@ -398,7 +398,7 @@ function Gestion() {
               onChange={(e) => updateForm({ fechaFinal: e.target.value })}
             ></input>
             <br />
-            <label className="text-white">Producto</label>
+            <label >Producto</label>
             <br />
             <select onChange={(e) => updateForm({ producto: e.target.value })}>
               {console.log("asd")}
@@ -406,7 +406,7 @@ function Gestion() {
               {products.map((product) => product)}
             </select>
             <br />
-            <label className="text-white">Porcentaje</label>
+            <label >Porcentaje</label>
             <br />
             <input
               value={form.porcentaje}
@@ -460,12 +460,12 @@ function Gestion() {
         </div>
       </div>
       <br />
-      <button onClick={submitPromocion} type="submit" class="btn btn-success">
+      <button onClick={submitPromocion} type="submit" class="btn btn-dark">
         Agregar promocion
       </button>
       <br />
       <br></br>
-      <h2 className="text-white">Visualizacion de ofertas actuales</h2>
+      <h2 >Visualizacion de ofertas actuales</h2>
 
       <div className="anuncioBody">
         <div className="post-list">

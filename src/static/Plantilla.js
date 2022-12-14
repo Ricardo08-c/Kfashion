@@ -111,22 +111,8 @@ class Plantilla extends React.Component {
                       Catálogo
                     </a>
                   </li>
-                  <li>
-                    <a
-                      className="dropdown-item text-white outline "
-                      href="/AnunciosPromociones"
-                    >
-                      Publicar Anuncio{" "}
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      className="dropdown-item text-white"
-                      href="/bannerPromociones"
-                    >
-                      Publicar Banner
-                    </a>
-                  </li>
+                  
+                  
 
                   {/* Opcion de menú para ingresar al formulario de contacto */}
                   <li>

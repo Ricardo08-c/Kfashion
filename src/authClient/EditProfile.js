@@ -174,7 +174,7 @@ class ProfileComponent extends React.Component{
     return (
       <div style = {{minHeight: "100%"}} className="m-4">
       <img src={this. state.imgSrc} width="400" height={"300"} alt="Profile"/>
-        <div className= "text-success">
+        <div className= "">
         <br></br>
           <br></br>
         <h4 style = {{display:"inline"}}>Nombre:    </h4>
@@ -187,7 +187,7 @@ class ProfileComponent extends React.Component{
           <br></br>
           <br></br>
           <br/>
-          <div className= "text-white">          
+          <div className= "">          
           <h4 style = {{display:"inline"}}>Correo:    </h4>
           <input  onChange={(e) => this.updateForm({ email: e.target.value })} defaultValue={this. state.email} style = {{minWidth:"30%",display:"inline"}}></input>
           <br></br>
@@ -219,7 +219,7 @@ class ProfileComponent extends React.Component{
           <br></br>
           <br></br>
           <a href = "/Perfil"style ={{display:"inline"}} className=" text-dark btn btn-secondary">Cancelar</a>
-         <li class = "text-dark" style ={{display:"inline"}}>  --</li>
+         <li class = "text-dark" style ={{ opacity:0, display:"inline"}}>  --</li>
         <button style ={{display:"inline"}}   onClick = {this.onSubmit}className=" text-dark btn btn-secondary">Guardar Cambios</button>
         
           </div>
@@ -258,7 +258,7 @@ function ProfileBuild(){
     
   }
   if(persons.length==0){
-    return <div className="position-relative" style = {{minHeight: "100%"}}><h2  className="text-white ">Cargando...</h2></div>
+    return <div className="position-relative" style = {{minHeight: "100%"}}><h2  className=" ">Cargando...</h2></div>
   }
   return (
 

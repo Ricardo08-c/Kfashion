@@ -359,18 +359,18 @@ function Gestion() {
 
   return (
     <div className="position-relative" style={{ minHeight: "100%" }}>
-      <h2 className="text-white">Gestion de promociones</h2>
+      <h2 className="">Gestion de promociones</h2>
       <div style={{ overflow: "hidden" }}>
         <form style={{ float: "none" }}>
           <div className="">
-            <label className="text-white">Descripcion de la promocion</label>
+            <label className="">Descripcion de la promocion</label>
             <br />
             <input
               value={form.descripcion}
               onChange={(e) => updateForm({ descripcion: e.target.value })}
             ></input>
             <br />
-            <label className="text-white">Fecha Inicio</label>
+            <label className="">Fecha Inicio</label>
             <br />
             <input
               type="date"
@@ -378,7 +378,7 @@ function Gestion() {
               onChange={(e) => updateForm({ fechaInicio: e.target.value })}
             ></input>
             <br />
-            <label className="text-white">Fecha Final</label>
+            <label className="">Fecha Final</label>
             <br />
             <input
               type="date"
@@ -386,7 +386,7 @@ function Gestion() {
               onChange={(e) => updateForm({ fechaFinal: e.target.value })}
             ></input>
             <br />
-            <label className="text-white">Producto</label>
+            <label className="">Producto</label>
             <br />
             <select onChange={(e) => updateForm({ producto: e.target.value })}>
               {console.log("asd")}
@@ -394,7 +394,7 @@ function Gestion() {
               {products.map((product) => product)}
             </select>
             <br />
-            <label className="text-white">Porcentaje</label>
+            <label className="">Porcentaje</label>
             <br />
             <input
               value={form.porcentaje}
@@ -448,12 +448,12 @@ function Gestion() {
         </div>
       </div>
       <br />
-      <button onClick={submitPromocion} type="submit" class="btn btn-success">
+      <button onClick={submitPromocion} type="submit" class="btn btn-dark">
         Agregar promocion
       </button>
       <br />
       <br></br>
-      <h2 className="text-white">Visualizacion de promociones actuales</h2>
+      <h2 className="">Visualizacion de promociones actuales</h2>
       <div
         id="carouselExampleControls"
         className=" position-relative carousel slide"

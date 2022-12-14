@@ -377,39 +377,39 @@ function Gestion() {
 
   return (
     <div className="position-relative" style={{ minHeight: "100%" }}>
-      <h2 className="text-white">Gestion de productos</h2>
+      <h2 className="">Gestion de productos</h2>
       <div style={{ overflow: "hidden" }}>
         <form style={{ float: "none" }}>
           <div className="">
-            <label className="text-white">Nombre del producto</label>
+            <label className="">Nombre del producto</label>
             <br />
             <input
               value={form.nombre}
               onChange={(e) => updateForm({ nombre: e.target.value })}
             ></input>
             <br />
-            <label className="text-white">Categoria del producto</label>
+            <label className="">Categoria del producto</label>
             <br />
             <input
               value={form.categoria}
               onChange={(e) => updateForm({ categoria: e.target.value })}
             ></input>
             <br />
-            <label className="text-white">Descripcion del producto</label>
+            <label className="">Descripcion del producto</label>
             <br />
             <input
               value={form.descripcion}
               onChange={(e) => updateForm({ descripcion: e.target.value })}
             ></input>
             <br />
-            <label className="text-white">Precio del producto</label>
+            <label className="">Precio del producto</label>
             <br />
             <input
               value={form.precio}
               onChange={(e) => updateForm({ precio: e.target.value })}
             ></input>
             <br />
-            <label className="text-white">
+            <label className="">
               Url de la imagen asociada al producto
             </label>
             <br />
@@ -418,7 +418,7 @@ function Gestion() {
               onChange={(e) => updateForm({ imgSrc: e.target.value })}
             ></input>
             <br />
-            <label className="text-white">Cantidad en Stock del producto</label>
+            <label className="">Cantidad en Stock del producto</label>
             <br />
             <input
               value={form.cantidad}
@@ -481,12 +481,12 @@ function Gestion() {
         </div>
       </div>
       <br />
-      <button onClick={submitProduct} type="submit" class="btn btn-success">
+      <button onClick={submitProduct} type="submit" class="btn btn-dark">
         Agregar producto
       </button>
       <br />
       <br></br>
-      <h2 className="text-white">Bùsqueda por nombre</h2>
+      <h2 className="">Bùsqueda por nombre</h2>
       <input type="text" onChange={handleChange}></input>
       <div style={{ minHeight: "100%" }} className="m-4">
         <br></br>

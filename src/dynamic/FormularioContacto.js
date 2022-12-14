@@ -46,9 +46,10 @@ function FormContacto() {
       style={{ minHeight: "100%", maxWidth: "30%" }}
     >
       <h2>Formulario de Contacto</h2>
-      <li style={{ display: "inline-block" }}>----</li>
+      <li style={{ opacity:0, display: "inline-block" }}>----</li>
       <form onSubmit={onSubmit}>
         {/*Mensaje instructivo*/}
+        
         <label htmlFor="name">
           Ingrese su nombre, correo electrónico y su consulta o mensaje y le
           contestaremos desde nuestro correo de servicio al cliente tan pronto
@@ -56,7 +57,8 @@ function FormContacto() {
         </label>
 
         {/*Etiqueta para informacion personal*/}
-        <h4 className="text-success" htmlFor="name" style={{ left: "10%" }}>
+        
+        <h4 className="" htmlFor="name" style={{ left: "10%" }}>
           Información Personal{" "}
         </h4>
 
@@ -84,10 +86,10 @@ function FormContacto() {
           />
         </div>
 
-        <li style={{ display: "inline-block" }}>----</li>
+        <li style={{ opacity:0, display: "inline-block" }}>----</li>
 
         {/*Título de mensaje o consulta */}
-        <h4 className="text-success" htmlFor="name" style={{ left: "10%" }}>
+        <h4 className="" htmlFor="name" style={{ left: "10%" }}>
           Mensaje o consulta{" "}
         </h4>
 
@@ -102,9 +104,9 @@ function FormContacto() {
             onChange={(e) => updateForm({ consulta: e.target.value })}
           />
         </div>
-
+        <br></br>
         {/*Botón que maneja elmevento de enviar mail, si el mail es enviado correctamente limpia los campos*/}
-        <button className="btn btn-outline-secondary" onClick={onSubmit}>
+        <button className="btn btn-dark" onClick={onSubmit}>
           Enviar Consulta
         </button>
       </form>

@@ -94,16 +94,15 @@ function CatalogBuild() {
       array = [];
       array.push(text);
     } else {
-      window.alert(
-        "Hubo un problema en el servidor, porfavor recarga la página"
-      );
+      
       console.log(`HTTP error: ${res.status}`);
-      return;
+      
     }
 
     let array2 = [];
-    let array1 = array[0];
-
+    //let array1 = array[0];
+    let array1 = [{usuario:[{nombre:"Ricardo", apellido:"soto"}],contenido:"Quienes son?",respuesta:""},{usuario:[{nombre:"Pedro", apellido:"Juarez"}],contenido:"Descuentos?",respuesta:"A veces"}];
+    
     for (let i = 0; i < array1.length; i++) {
       let datos = array1[i];
       let respuesta = "No contestada";

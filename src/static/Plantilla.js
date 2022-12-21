@@ -194,7 +194,15 @@ class Plantilla extends React.Component {
                             Ver mis órdenes de compra
                           </a>
                         </li>
-
+                        <li>
+                              <a
+                                onClick={this.logout}
+                                className="dropdown-item text-white"
+                                href="/"
+                              >
+                                Cerrar Sesión
+                              </a>
+                            </li>
                         {rol == "EMP" ? (
                           <div>
                             <li>
@@ -240,15 +248,7 @@ class Plantilla extends React.Component {
                             <li>
                               <hr className="dropdown-divider" />
                             </li>
-                            <li>
-                              <a
-                                onClick={this.logout}
-                                className="dropdown-item text-white"
-                                href="/"
-                              >
-                                Cerrar Sesión
-                              </a>
-                            </li>
+                           
                           </div>
                         ) : (
                           <></>

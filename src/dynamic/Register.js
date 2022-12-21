@@ -60,15 +60,15 @@ function Facturacion1() {
       className="position-relative alineadoCentroNonRel"
       style={{ minHeight: "100%", maxWidth: "30%" }}
     >
-      <h2 className="text-white">Registrar Usuario</h2>
-      <li style={{ display: "inline-block" }}>----</li>
+      <h2 className="">Registrar Usuario</h2>
+      <li style={{ opacity:0,display: "inline-block" }}>----</li>
       <form onSubmit={onSubmit}>
-        <h4 className="text-success" htmlFor="name" style={{ left: "10%" }}>
+        <h4 className="" htmlFor="name" style={{ left: "10%" }}>
           Información Personal{" "}
         </h4>
 
         <div className="form-group" style={{ display: "inline-block" }}>
-          <label className="text-white" htmlFor="name">
+          <label className="" htmlFor="name">
             Nombre
           </label>
           <input
@@ -79,10 +79,10 @@ function Facturacion1() {
             onChange={(e) => updateForm({ nombre: e.target.value })}
           />
         </div>
-        <li style={{ display: "inline-block" }}>----</li>
+        <li style={{opacity:0, display: "inline-block" }}>----</li>
 
         <div className="form-group" style={{ display: "inline-block" }}>
-          <label className="text-white" htmlFor="name">
+          <label className="" htmlFor="name">
             Apellido
           </label>
           <input
@@ -93,9 +93,9 @@ function Facturacion1() {
             onChange={(e) => updateForm({ apellido: e.target.value })}
           />
         </div>
-        <li style={{ display: "inline-block" }}>----</li>
+        <li style={{ opacity:0,display: "inline-block" }}>----</li>
         <div className="form-group">
-          <label className="text-white" htmlFor="name">
+          <label className="" htmlFor="name">
             Cédula
           </label>
           <input
@@ -108,7 +108,7 @@ function Facturacion1() {
         </div>
 
         <div className="  form-group">
-          <label className="text-white" htmlFor="name">
+          <label className="" htmlFor="name">
             Fecha de Nacimiento
           </label>
           <input
@@ -121,7 +121,7 @@ function Facturacion1() {
           />
         </div>
         <div className="form-group">
-          <label className="text-white" htmlFor="name">
+          <label className="" htmlFor="name">
             Sexo
           </label>
           <select
@@ -133,12 +133,12 @@ function Facturacion1() {
             <option value="M">Masculino</option>
           </select>
         </div>
-        <li>----</li>
-        <h4 className="text-success" htmlFor="name" style={{ left: "10%" }}>
+        <li style = {{opacity:0}}>----</li>
+        <h4 className="" htmlFor="name" style={{ left: "10%" }}>
           Información para la cuenta{" "}
         </h4>
         <div className="form-group">
-          <label className="text-white" htmlFor="position">
+          <label className="" htmlFor="position">
             Correo
           </label>
           <input
@@ -151,7 +151,7 @@ function Facturacion1() {
         </div>
 
         <div className="form-group">
-          <label className="text-white" htmlFor="name">
+          <label className="" htmlFor="name">
             Contraseña
           </label>
           <input
@@ -163,7 +163,7 @@ function Facturacion1() {
           />
         </div>
         <div className="form-group">
-          <label className="text-white" htmlFor="name">
+          <label className="" htmlFor="name">
             Rol
           </label>
           <select
@@ -177,7 +177,7 @@ function Facturacion1() {
         </div>
         <br></br>
         <button
-          className="btn text-white btn-outline-secondary"
+          className="btn  btn-outline-secondary"
           onClick={onSubmit}
         >
           Registrar

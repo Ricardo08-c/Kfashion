@@ -1,3 +1,4 @@
+import { toHaveAccessibleDescription } from "@testing-library/jest-dom/dist/matchers";
 import React from "react";
 import "../App.css";
 
@@ -93,7 +94,7 @@ class CatalogComponent extends React.Component {
         </td>
         <td>{this.props.name}</td>
         <td>{this.props.description}</td>
-        <td>{"$" + this.props.price}</td>
+        <td>{"₡" + this.props.price}</td>
         {this.props.editable ? (
           <td
             style={{ width: "14%", minWidth: "15%", maxWidth: "15%" }}
@@ -128,7 +129,7 @@ class CatalogComponent extends React.Component {
         )}
 
         <td>{this.props.descuento + "%"}</td>
-        <td>{"$" + this.props.sumTotal}</td>
+        <td>{"₡" + this.props.sumTotal}</td>
       </tr>
     );
   }
@@ -200,7 +201,7 @@ async function addToCart(subtotal) {
     array = [];
     array.push(text);
   } else {
-    console.log(`HTTP error: ${res.status}`);
+    console.log(`HTTP error: ₡{res.status}`);
   }
   let array1 = array[0];
   let numFactura = array1[0].numFactura;
@@ -244,6 +245,8 @@ class Carrito extends React.Component {
       productsA: [],
       totalSum: 0,
       cartConfirmed: false,
+      checked: false,
+      checkedServ: false,
       editable: this.props.editable,
     };
     this.change();
@@ -338,7 +341,18 @@ class Carrito extends React.Component {
     );
     ///window.location.reload();
   };
+handleChangeOrder=(e)=>{
+  
+  this.setState({checked: !this.state.checked, checkedServ:false})
 
+
+}
+handleChangeOrder1=(e)=>{
+ 
+  this.setState({checkedServ: !this.state.checkedServ, checked: false})
+
+
+}
   render() {
     let editable = this.state.editable || true;
     return (
@@ -377,7 +391,7 @@ class Carrito extends React.Component {
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>{"TOTAL:  $" + this.state.totalSum}</td>
+                        <td>{"TOTAL:  ₡" + this.state.totalSum}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -385,7 +399,50 @@ class Carrito extends React.Component {
                 {editable ? (
                   <div>
                     {this.state.cartConfirmed ? (
+                      
                       <div>
+                        <h3>                       
+        Elija un método de entrega
+      </h3>
+        <br></br>
+        <div style={{ marginLeft: "15%", maxWidth: "70%" }}>
+                  <table class="table table-bordered border-dark">
+                    <thead class="thead-dark">
+                      
+                    </thead>
+                    <tbody>
+                    <tr scope = "row">
+                      <th>
+                        <input
+                            type="checkbox"
+                            checked={this.state.checked}
+                            onChange={this.handleChangeOrder}
+                          />
+                          
+                          Servicio express 
+                        </th>
+                          <th>
+                          ₡4500
+                          </th>
+                        </tr>
+                        <tr scope = "row">
+                          <th>
+                        <input
+                            type="checkbox"
+                            checked={this.state.checkedServ}
+                            onChange={this.handleChangeOrder1}
+                          />
+                          Recoger en tienda 
+                          </th>
+                          <th>
+                          ₡0
+                          </th>
+                        </tr>
+                        
+                    </tbody>
+                    </table>
+          </div>
+      
                         <button
                           style={{ display: "inline" }}
                           onClick={this.authorizeCart}
@@ -420,6 +477,15 @@ class Carrito extends React.Component {
                     )}
 
                     <br></br>
+                    <div>
+      
+      <br></br>
+      <br></br>
+      
+      
+
+
+    </div>
                   </div>
                 ) : (
                   <></>

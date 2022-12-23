@@ -88,7 +88,7 @@ class CatalogComponent extends React.Component {
 
   render() {
     return (
-      <tr class="bg-white">
+      <tr className="bg-white">
         <td scope="col">
           <img src={this.props.imgSrc} alt="..." width="100" height="100" />
         </td>
@@ -98,7 +98,7 @@ class CatalogComponent extends React.Component {
         {this.props.editable ? (
           <td
             style={{ width: "14%", minWidth: "15%", maxWidth: "15%" }}
-            class="col"
+            className="col"
           >
             <button
               style={{ display: "inline" }}
@@ -107,13 +107,13 @@ class CatalogComponent extends React.Component {
             >
               -
             </button>
-            <li style={{ display: "inline" }} class="text-white">
+            <li style={{ display: "inline" }} className="text-white">
               --
             </li>
 
             {this.props.cantidad}
 
-            <li style={{ display: "inline" }} class="text-white">
+            <li style={{ display: "inline" }} className="text-white">
               --
             </li>
             <button
@@ -194,7 +194,7 @@ async function addToCart(subtotal) {
     ]);
   }
 
-  let url = "https://kfashion.cyclic.app/numFactura";
+  let url = "https://kfashionapi.onrender.com/numFactura";
   let res = await fetch(url);
   if (res.ok) {
     let text = await res.json();
@@ -226,7 +226,7 @@ async function addToCart(subtotal) {
 
   console.log("order:", newOrder2);
 
-  await fetch("https://kfashion.cyclic.app/register/order2", {
+  await fetch("https://kfashionapi.onrender.com/register/order2", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -309,7 +309,7 @@ class Carrito extends React.Component {
         }
       }
     }
-    if (sum != this.state.totalSum) {
+    if (sum !== this.state.totalSum) {
       this.state.totalSum = sum;
     }
   };
@@ -341,33 +341,27 @@ class Carrito extends React.Component {
     );
     ///window.location.reload();
   };
-handleChangeOrder=(e)=>{
-  
-  this.setState({checked: !this.state.checked, checkedServ:false})
-
-
-}
-handleChangeOrder1=(e)=>{
- 
-  this.setState({checkedServ: !this.state.checkedServ, checked: false})
-
-
-}
+  handleChangeOrder = (e) => {
+    this.setState({ checked: !this.state.checked, checkedServ: false });
+  };
+  handleChangeOrder1 = (e) => {
+    this.setState({ checkedServ: !this.state.checkedServ, checked: false });
+  };
   render() {
     let editable = this.state.editable || true;
     return (
       <Plantilla
         sectionToDisplay={
           <div style={{ minHeight: "86%" }}>
-            {this.state.totalSum != 0 ? (
+            {this.state.totalSum !== 0 ? (
               <div style={{ minHeight: "86%" }} className="position-relative">
                 <br></br>
                 <h2>Resumen del carrito de compras:</h2>
                 <br></br>
 
                 <div style={{ marginLeft: "15%", maxWidth: "70%" }}>
-                  <table class="table table-bordered border-dark">
-                    <thead class="thead-dark">
+                  <table className="table table-bordered border-dark">
+                    <thead className="thead-dark">
                       <tr>
                         <th scope="col">Producto</th>
                         <th scope="col">Nombre</th>
@@ -384,7 +378,7 @@ handleChangeOrder1=(e)=>{
                     <tbody>
                       {this.productsToCart().map((data) => data)}
 
-                      <tr class="">
+                      <tr className="">
                         <td></td>
                         <td></td>
                         <td></td>
@@ -399,50 +393,39 @@ handleChangeOrder1=(e)=>{
                 {editable ? (
                   <div>
                     {this.state.cartConfirmed ? (
-                      
                       <div>
-                        <h3>                       
-        Elija un método de entrega
-      </h3>
-        <br></br>
-        <div style={{ marginLeft: "15%", maxWidth: "70%" }}>
-                  <table class="table table-bordered border-dark">
-                    <thead class="thead-dark">
-                      
-                    </thead>
-                    <tbody>
-                    <tr scope = "row">
-                      <th>
-                        <input
-                            type="checkbox"
-                            checked={this.state.checked}
-                            onChange={this.handleChangeOrder}
-                          />
-                          
-                          Servicio express 
-                        </th>
-                          <th>
-                          ₡4500
-                          </th>
-                        </tr>
-                        <tr scope = "row">
-                          <th>
-                        <input
-                            type="checkbox"
-                            checked={this.state.checkedServ}
-                            onChange={this.handleChangeOrder1}
-                          />
-                          Recoger en tienda 
-                          </th>
-                          <th>
-                          ₡0
-                          </th>
-                        </tr>
-                        
-                    </tbody>
-                    </table>
-          </div>
-      
+                        <h3>Elija un método de entrega</h3>
+                        <br></br>
+                        <div style={{ marginLeft: "15%", maxWidth: "70%" }}>
+                          <table className="table table-bordered border-dark">
+                            <thead className="thead-dark"></thead>
+                            <tbody>
+                              <tr scope="row">
+                                <th>
+                                  <input
+                                    type="checkbox"
+                                    checked={this.state.checked}
+                                    onChange={this.handleChangeOrder}
+                                  />
+                                  Servicio express
+                                </th>
+                                <th>₡4500</th>
+                              </tr>
+                              <tr scope="row">
+                                <th>
+                                  <input
+                                    type="checkbox"
+                                    checked={this.state.checkedServ}
+                                    onChange={this.handleChangeOrder1}
+                                  />
+                                  Recoger en tienda
+                                </th>
+                                <th>₡0</th>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+
                         <button
                           style={{ display: "inline" }}
                           onClick={this.authorizeCart}
@@ -451,7 +434,7 @@ handleChangeOrder1=(e)=>{
                           Continuar editando +
                         </button>
                         <li
-                          class="text-dark"
+                          className="text-dark"
                           style={{ opacity: 0, display: "inline" }}
                         >
                           {" "}
@@ -478,14 +461,9 @@ handleChangeOrder1=(e)=>{
 
                     <br></br>
                     <div>
-      
-      <br></br>
-      <br></br>
-      
-      
-
-
-    </div>
+                      <br></br>
+                      <br></br>
+                    </div>
                   </div>
                 ) : (
                   <></>

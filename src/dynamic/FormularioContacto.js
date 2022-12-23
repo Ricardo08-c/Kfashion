@@ -46,10 +46,10 @@ function FormContacto() {
       style={{ minHeight: "100%", maxWidth: "30%" }}
     >
       <h2>Formulario de Contacto</h2>
-      <li style={{ opacity:0, display: "inline-block" }}>----</li>
+      <li style={{ opacity: 0, display: "inline-block" }}>----</li>
       <form onSubmit={onSubmit}>
         {/*Mensaje instructivo*/}
-        
+
         <label htmlFor="name">
           Ingrese su nombre, correo electrónico y su consulta o mensaje y le
           contestaremos desde nuestro correo de servicio al cliente tan pronto
@@ -57,7 +57,7 @@ function FormContacto() {
         </label>
 
         {/*Etiqueta para informacion personal*/}
-        
+
         <h4 className="" htmlFor="name" style={{ left: "10%" }}>
           Información Personal{" "}
         </h4>
@@ -86,7 +86,7 @@ function FormContacto() {
           />
         </div>
 
-        <li style={{ opacity:0, display: "inline-block" }}>----</li>
+        <li style={{ opacity: 0, display: "inline-block" }}>----</li>
 
         {/*Título de mensaje o consulta */}
         <h4 className="" htmlFor="name" style={{ left: "10%" }}>

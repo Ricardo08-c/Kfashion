@@ -37,7 +37,7 @@ class Orders extends React.Component {
   componentDidUpdate() {
     if (
       this.props.dataToDisplay &&
-      this.props.dataToDisplay != this.state.orders
+      this.props.dataToDisplay !== this.state.orders
     ) {
       this.state.orders = this.props.dataToDisplay;
 
@@ -94,7 +94,7 @@ class Orders extends React.Component {
   };
 
   takeOrdersUser = async () => {
-    let url = "https://kfashion.cyclic.app/orders";
+    let url = "https://kfashionapi.onrender.com/orders";
     let res = await fetch(url);
     let userId = JSON.parse(
       localStorage.getItem(localStorage.getItem("ipAdress"))
@@ -123,9 +123,9 @@ class Orders extends React.Component {
     return (
       <div style={{ minHeight: "86%" }} className=" position-relative">
         <br></br>
-        <h3 class="">Ordenes:</h3>
+        <h3 className="">Ordenes:</h3>
         <br></br>
-        <h5 style={{ display: "inline", left: "10%" }} class="">
+        <h5 style={{ display: "inline", left: "10%" }} className="">
           Filtrar{" "}
         </h5>
         <select
@@ -159,18 +159,18 @@ class Orders extends React.Component {
               .map((filteredOrder) => (
                 <div>
                   <div>
-                    <h5 class="">
+                    <h5 className="">
                       {"Orden #" + filteredOrder.props.index}
                     </h5>
-                    <h5 class="">
+                    <h5 className="">
                       {"Numero de factura: " + filteredOrder.props.numFactura}
                     </h5>
-                    <h5 class="">
+                    <h5 className="">
                       {"Estado: " + filteredOrder.props.estado}
                     </h5>
                     {!this.props.oneUser ? (
                       <div>
-                        <h5 class="">
+                        <h5 className="">
                           {"Usuario que realiza la orden: " +
                             filteredOrder.props.objUser.nombre +
                             " " +
@@ -180,7 +180,7 @@ class Orders extends React.Component {
                     ) : (
                       <div></div>
                     )}
-                    <h5 class="">
+                    <h5 className="">
                       {"Fecha en que se realizó la orden:  " +
                         filteredOrder.props.fecha +
                         ",   a las " +
@@ -195,7 +195,7 @@ class Orders extends React.Component {
               ))}
           </div>
         ) : (
-          <h2 class="">Cargando...</h2>
+          <h2 className="">Cargando...</h2>
         )}
       </div>
     );
@@ -266,7 +266,7 @@ class Order extends React.Component {
       motivo: this.state.motivo,
     });
 
-    await fetch("https://kfashion.cyclic.app/update/order", {
+    await fetch("https://kfashionapi.onrender.com/update/order", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -308,28 +308,28 @@ class Order extends React.Component {
   render() {
     return (
       <div style={{ marginLeft: "15%", maxWidth: "70%" }}>
-        <table class="table table-bordered border-dark">
-          <thead class="thead-dark">
+        <table className="table table-bordered border-dark">
+          <thead className="thead-dark">
             <tr>
-              <th class="" scope="col">
+              <th className="" scope="col">
                 Producto
               </th>
-              <th class="" scope="col">
+              <th className="" scope="col">
                 Nombre
               </th>
-              <th class="" scope="col">
+              <th className="" scope="col">
                 Descripcion
               </th>
-              <th class="" scope="col">
+              <th className="" scope="col">
                 Precio unitario
               </th>
-              <th class="" scope="col">
+              <th className="" scope="col">
                 Cantidad
               </th>
-              <th class="" scope="col">
+              <th className="" scope="col">
                 Descuento
               </th>
-              <th class="" scope="col">
+              <th className="" scope="col">
                 Total de precios unitarios
               </th>
             </tr>
@@ -338,8 +338,8 @@ class Order extends React.Component {
           <tbody>
             {this.productsToCart().map((data) => data)}
 
-            <tr class="border border-dark">
-              {this.props.cancel && this.props.estado != "Cancelada" ? (
+            <tr className="border border-dark">
+              {this.props.cancel && this.props.estado !== "Cancelada" ? (
                 <td>
                   <button
                     onClick={this.cancelarOrden}
@@ -351,13 +351,13 @@ class Order extends React.Component {
               ) : (
                 <td></td>
               )}
-              {this.props.cancel && this.props.estado != "Cancelada" ? (
+              {this.props.cancel && this.props.estado !== "Cancelada" ? (
                 <td>
                   <input
                     onChange={(e) => {
                       this.setState({ motivo: e.target.value });
                     }}
-                    class="input"
+                    className="input"
                     type={"text"}
                     placeholder="Motivo"
                   ></input>
@@ -371,7 +371,7 @@ class Order extends React.Component {
               <td></td>
               <td></td>
 
-              <td class="">{"TOTAL:  $" + this.state.totalSum}</td>
+              <td className="">{"TOTAL:  $" + this.state.totalSum}</td>
             </tr>
           </tbody>
         </table>

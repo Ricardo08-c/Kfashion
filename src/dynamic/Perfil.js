@@ -112,7 +112,7 @@ function ProfileBuild() {
       setPersons(perfil);
     });
   }
-  if (persons.length == 0) {
+  if (persons.length === 0) {
     return (
       <div className="position-relative" style={{ minHeight: "100%" }}>
         <h2 className=" ">Cargando...</h2>

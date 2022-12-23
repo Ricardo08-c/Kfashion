@@ -23,7 +23,7 @@ class PyRcomponent extends React.Component {
   async submitAnswer2(respuesta, questionId, comp) {
     let json = JSON.stringify({ preguntaId: questionId, respuesta: respuesta });
 
-    await fetch("https://kfashion.cyclic.app/question", {
+    await fetch("https://kfashionapi.onrender.com/question", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -86,7 +86,7 @@ function CatalogBuild() {
   }, []);
 
   async function getPreguntas() {
-    let url = "https://kfashion.cyclic.app/preguntas";
+    let url = "https://kfashionapi.onrender.com/preguntas";
     let res = await fetch(url);
 
     if (res.ok) {
@@ -94,15 +94,24 @@ function CatalogBuild() {
       array = [];
       array.push(text);
     } else {
-      
       console.log(`HTTP error: ${res.status}`);
-      
     }
 
     let array2 = [];
     //let array1 = array[0];
-    let array1 = [{usuario:[{nombre:"Ricardo", apellido:"soto"}],contenido:"Quienes son?",respuesta:""},{usuario:[{nombre:"Pedro", apellido:"Juarez"}],contenido:"Descuentos?",respuesta:"A veces"}];
-    
+    let array1 = [
+      {
+        usuario: [{ nombre: "Ricardo", apellido: "soto" }],
+        contenido: "Quienes son?",
+        respuesta: "",
+      },
+      {
+        usuario: [{ nombre: "Pedro", apellido: "Juarez" }],
+        contenido: "Descuentos?",
+        respuesta: "A veces",
+      },
+    ];
+
     for (let i = 0; i < array1.length; i++) {
       let datos = array1[i];
       let respuesta = "No contestada";
@@ -139,7 +148,7 @@ function CatalogBuild() {
       usuario: userobj._id,
       respuesta: "",
     };
-    await fetch("https://kfashion.cyclic.app/register/question", {
+    await fetch("https://kfashionapi.onrender.com/register/question", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

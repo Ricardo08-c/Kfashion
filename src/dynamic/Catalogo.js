@@ -135,7 +135,7 @@ function CatalogBuild() {
   }, []);
 
   async function getProducts() {
-    let url = "https://kfashion.cyclic.app/products";
+    let url = "https://kfashionapi.onrender.com/products";
 
     let res = await fetch(url);
 
@@ -209,8 +209,8 @@ function Catalogo() {
       <Plantilla
         sectionToDisplay={
           <div style={{ minHeight: "100%" }}>
-            <div class="popup cop">
-              <span class="popuptext" data={false} id="pop">
+            <div className="popup cop">
+              <span className="popuptext" data={false} id="pop">
                 Añadido al carrito
               </span>
             </div>

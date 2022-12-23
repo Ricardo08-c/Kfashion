@@ -30,7 +30,7 @@ function Facturacion1() {
     const newPerson = { ...form };
     //validar si está vacío
 
-    await fetch("https://kfashion.cyclic.app/add/user", {
+    await fetch("https://kfashionapi.onrender.com/add/user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -61,7 +61,7 @@ function Facturacion1() {
       style={{ minHeight: "100%", maxWidth: "30%" }}
     >
       <h2 className="">Registrar Usuario</h2>
-      <li style={{ opacity:0,display: "inline-block" }}>----</li>
+      <li style={{ opacity: 0, display: "inline-block" }}>----</li>
       <form onSubmit={onSubmit}>
         <h4 className="" htmlFor="name" style={{ left: "10%" }}>
           Información Personal{" "}
@@ -79,7 +79,7 @@ function Facturacion1() {
             onChange={(e) => updateForm({ nombre: e.target.value })}
           />
         </div>
-        <li style={{opacity:0, display: "inline-block" }}>----</li>
+        <li style={{ opacity: 0, display: "inline-block" }}>----</li>
 
         <div className="form-group" style={{ display: "inline-block" }}>
           <label className="" htmlFor="name">
@@ -93,7 +93,7 @@ function Facturacion1() {
             onChange={(e) => updateForm({ apellido: e.target.value })}
           />
         </div>
-        <li style={{ opacity:0,display: "inline-block" }}>----</li>
+        <li style={{ opacity: 0, display: "inline-block" }}>----</li>
         <div className="form-group">
           <label className="" htmlFor="name">
             Cédula
@@ -133,7 +133,7 @@ function Facturacion1() {
             <option value="M">Masculino</option>
           </select>
         </div>
-        <li style = {{opacity:0}}>----</li>
+        <li style={{ opacity: 0 }}>----</li>
         <h4 className="" htmlFor="name" style={{ left: "10%" }}>
           Información para la cuenta{" "}
         </h4>
@@ -176,10 +176,7 @@ function Facturacion1() {
           </select>
         </div>
         <br></br>
-        <button
-          className="btn  btn-outline-secondary"
-          onClick={onSubmit}
-        >
+        <button className="btn  btn-outline-secondary" onClick={onSubmit}>
           Registrar
         </button>
       </form>

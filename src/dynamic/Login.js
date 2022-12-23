@@ -36,7 +36,7 @@ function Login1() {
 
     // When a post request is sent to the create url, we'll add a new record to the database.
 
-    const res = await fetch("https://kfashion.cyclic.app/get/users");
+    const res = await fetch("https://kfashionapi.onrender.com/get/users");
     if (res.ok) {
       let text = await res.json();
       console.log("json", res);

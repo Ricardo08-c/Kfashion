@@ -24,7 +24,7 @@ async function getCanCart() {
     for (let i = 0; i < products.length; i++) {
       cant += products[i].cantidad;
     }
-    if (cant == 0) {
+    if (cant === 0) {
       return "";
     }
     return cant;
@@ -38,7 +38,7 @@ function getCartSize() {
     for (let i = 0; i < products.length; i++) {
       cant += products[i].cantidad;
     }
-    if (cant == 0) {
+    if (cant === 0) {
       return "";
     }
     return cant;
@@ -111,8 +111,6 @@ class Plantilla extends React.Component {
                       Catálogo
                     </a>
                   </li>
-                  
-                  
 
                   {/* Opcion de menú para ingresar al formulario de contacto */}
                   <li>
@@ -195,15 +193,15 @@ class Plantilla extends React.Component {
                           </a>
                         </li>
                         <li>
-                              <a
-                                onClick={this.logout}
-                                className="dropdown-item text-white"
-                                href="/"
-                              >
-                                Cerrar Sesión
-                              </a>
-                            </li>
-                        {rol == "EMP" ? (
+                          <a
+                            onClick={this.logout}
+                            className="dropdown-item text-white"
+                            href="/"
+                          >
+                            Cerrar Sesión
+                          </a>
+                        </li>
+                        {rol === "EMP" ? (
                           <div>
                             <li>
                               <a
@@ -248,7 +246,6 @@ class Plantilla extends React.Component {
                             <li>
                               <hr className="dropdown-divider" />
                             </li>
-                           
                           </div>
                         ) : (
                           <></>

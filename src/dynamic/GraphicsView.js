@@ -60,14 +60,14 @@ class ReporteC extends React.Component {
       let row = [];
       for (let j = 0; j < this.state.orders.length; j++) {
         if (
-          new Date(this.state.orders[j].fecha).toLocaleDateString() ==
+          new Date(this.state.orders[j].fecha).toLocaleDateString() ===
           this.state.labels[i]
         ) {
           if (canceladas) {
-            if (this.state.orders[j].estado == "Cancelada") {
+            if (this.state.orders[j].estado === "Cancelada") {
               row.push(this.state.orders[j]);
             }
-          } else if (this.state.orders[j].estado == "Facturado") {
+          } else if (this.state.orders[j].estado === "Facturado") {
             row.push(this.state.orders[j]);
           }
         }
@@ -96,7 +96,7 @@ class ReporteC extends React.Component {
     );
   };
   takeOrdersUser = async () => {
-    let url = "https://kfashion.cyclic.app/orders";
+    let url = "https://kfashionapi.onrender.com/orders";
     let res = await fetch(url);
 
     if (res.ok) {
@@ -130,7 +130,7 @@ class ReporteC extends React.Component {
         options: {
           responsive: true,
           onClick: (event, element) => {
-            if (element[0].datasetIndex == 0) {
+            if (element[0].datasetIndex === 0) {
               this.setOrdersToDisplay(dataMap[element[0].index]);
             } else {
               this.setOrdersToDisplay(canceledDataMap[element[0].index]);
@@ -178,16 +178,12 @@ class ReporteC extends React.Component {
 
     return (
       <div style={{ minHeight: "85%" }} className=" ">
-        {this.state.orders.length != 0 ? (
+        {this.state.orders.length !== 0 ? (
           <div style={{ marginLeft: "10%", maxWidth: "80%" }}>
             <br></br>
 
             <div className="  form-group">
-              <label
-                style={{ display: "inline" }}
-                className=""
-                htmlFor="name"
-              >
+              <label style={{ display: "inline" }} className="" htmlFor="name">
                 Fecha de Inicio{" "}
               </label>
               <input
@@ -196,14 +192,9 @@ class ReporteC extends React.Component {
                 className="form-control"
                 id="name"
                 onChange={this.displayDatesStart}
-                class="form-control"
               />
               <li style={{ display: "inline", opacity: "0" }}>-----</li>
-              <label
-                style={{ display: "inline" }}
-                className=""
-                htmlFor="name"
-              >
+              <label style={{ display: "inline" }} className="" htmlFor="name">
                 Fecha Fin{" "}
               </label>
               <input
@@ -212,7 +203,6 @@ class ReporteC extends React.Component {
                 className="form-control"
                 id="name"
                 onChange={this.displayDates}
-                class="form-control"
               />
             </div>
 

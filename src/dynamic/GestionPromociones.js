@@ -33,7 +33,7 @@ class BannerComponent extends React.Component {
   removeFromDatabase(idToRemove) {
     let json = JSON.stringify({ _id: idToRemove });
     console.log(json);
-    fetch("https://kfashion.cyclic.app/remove/promotion", {
+    fetch("https://kfashionapi.onrender.com/remove/promotion", {
       method: "delete",
       headers: {
         "Content-Type": "application/json",
@@ -64,7 +64,7 @@ class BannerComponent extends React.Component {
       descripcion: this.state.descripcion,
     });
 
-    await fetch("https://kfashion.cyclic.app/updatePromo", {
+    await fetch("https://kfashionapi.onrender.com/updatePromo", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -122,26 +122,26 @@ class BannerComponent extends React.Component {
           {/* Modal */}
 
           <div
-            class="modal fade"
+            className="modal fade"
             id={"Promo" + this.props.idObject}
             tabindex="-1"
             aria-labelledby="exampleModalLabel"
             aria-hidden="true"
           >
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title" id="exampleModalLabel">
                     Edicion de producto
                   </h5>
                   <button
                     type="button"
-                    class="btn-close"
+                    className="btn-close"
                     data-bs-dismiss="modal"
                     aria-label="Close"
                   ></button>
                 </div>
-                <div class="modal-body">
+                <div className="modal-body">
                   <label>Descripcion:{this.props.descripcion}</label>
                   <br />
                   <input onChange={this.changeDescripcion}></input>
@@ -159,10 +159,10 @@ class BannerComponent extends React.Component {
                   <input onChange={this.changePorcentaje}></input>
                   <br />
                 </div>
-                <div class="modal-footer">
+                <div className="modal-footer">
                   <button
                     type="button"
-                    class="btn btn-secondary"
+                    className="btn btn-secondary"
                     data-bs-dismiss="modal"
                   >
                     Cerrar
@@ -171,7 +171,7 @@ class BannerComponent extends React.Component {
                     onClick={this.editPromocion}
                     type="button"
                     data-bs-dismiss="modal"
-                    class="btn btn-primary"
+                    className="btn btn-primary"
                   >
                     Guardar
                   </button>
@@ -199,7 +199,7 @@ class BannerComponent extends React.Component {
             </div>
             <button
               type="button"
-              class="btn btn-primary"
+              className="btn btn-primary"
               data-bs-toggle="modal"
               data-bs-target={"#" + "Promo" + this.props.idObject}
             >
@@ -208,7 +208,7 @@ class BannerComponent extends React.Component {
             <span> </span>
             <button
               onClick={this.removePromocion}
-              class="btn btn-danger"
+              className="btn btn-danger"
               type="button"
             >
               Remover
@@ -246,7 +246,7 @@ function Gestion() {
   // Obtiene las promociones de la BD y se carga a un arreglo de banners
 
   async function getPromociones() {
-    let url = "https://kfashion.cyclic.app/promociones";
+    let url = "https://kfashionapi.onrender.com/promociones";
     let res = await fetch(url);
 
     if (res.ok) {
@@ -317,7 +317,7 @@ function Gestion() {
       const newPromo = { ...form };
       newPromo.porcentaje = parseInt(newPromo.porcentaje);
       console.log(JSON.stringify(newPromo));
-      await fetch("https://kfashion.cyclic.app/register/promotion", {
+      await fetch("https://kfashionapi.onrender.com/register/promotion", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -336,7 +336,7 @@ function Gestion() {
   // Obtienes los productos de la BD para ser cargados a un dropdown
 
   async function getProducts() {
-    let url = "https://kfashion.cyclic.app/products";
+    let url = "https://kfashionapi.onrender.com/products";
     let res = await fetch(url);
 
     if (res.ok) {
@@ -412,35 +412,35 @@ function Gestion() {
         </form>
 
         <div
-          class="modal"
+          className="modal"
           id="exampleModal"
           tabindex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="exampleModalLabel">
                   Modal title
                 </h5>
                 <button
                   type="button"
-                  class="btn-close"
+                  className="btn-close"
                   data-bs-dismiss="modal"
                   aria-label="Close"
                 ></button>
               </div>
-              <div class="modal-body"></div>
-              <div class="modal-footer">
+              <div className="modal-body"></div>
+              <div className="modal-footer">
                 <button
                   type="button"
-                  class="btn btn-secondary"
+                  className="btn btn-secondary"
                   data-bs-dismiss="modal"
                 >
                   Cerrar
                 </button>
-                <button type="button" class="btn btn-primary">
+                <button type="button" className="btn btn-primary">
                   Guardar
                 </button>
               </div>
@@ -449,7 +449,7 @@ function Gestion() {
         </div>
       </div>
       <br />
-      <button onClick={submitPromocion} type="submit" class="btn btn-dark">
+      <button onClick={submitPromocion} type="submit" className="btn btn-dark">
         Agregar promocion
       </button>
       <br />

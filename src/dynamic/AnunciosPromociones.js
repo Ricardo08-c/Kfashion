@@ -47,7 +47,7 @@ function BannerBuild() {
   }, []);
 
   async function getPromociones() {
-    let url = "https://kfashion.cyclic.app/promociones";
+    let url = "https://kfashionapi.onrender.com/promociones";
     let res = await fetch(url);
     if (res.ok) {
       let text = await res.json();

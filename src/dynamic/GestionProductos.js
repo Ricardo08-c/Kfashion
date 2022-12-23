@@ -36,7 +36,7 @@ class ProductRow extends React.Component {
 
     let json = JSON.stringify({ _id: idToRemove });
     console.log(json);
-    fetch("https://kfashion.cyclic.app/remove/product", {
+    fetch("https://kfashionapi.onrender.com/remove/product", {
       method: "delete",
       headers: {
         "Content-Type": "application/json",
@@ -72,7 +72,7 @@ class ProductRow extends React.Component {
       descuento: 0,
     });
 
-    await fetch("https://kfashion.cyclic.app/updateProduct", {
+    await fetch("https://kfashionapi.onrender.com/updateProduct", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -137,26 +137,26 @@ class ProductRow extends React.Component {
             {/* Modal */}
 
             <div
-              class="modal fade"
+              className="modal fade"
               id={"Producto" + this.props.idObject}
               tabindex="-1"
               aria-labelledby="exampleModalLabel"
               aria-hidden="true"
             >
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">
+              <div className="modal-dialog">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h5 className="modal-title" id="exampleModalLabel">
                       Edicion de producto
                     </h5>
                     <button
                       type="button"
-                      class="btn-close"
+                      className="btn-close"
                       data-bs-dismiss="modal"
                       aria-label="Close"
                     ></button>
                   </div>
-                  <div class="modal-body">
+                  <div className="modal-body">
                     {console.log("ad->" + this.props.name)}
                     <label>Nombre:{this.props.name}</label>
                     <br />
@@ -183,10 +183,10 @@ class ProductRow extends React.Component {
                     <input onChange={this.changeUrl}></input>
                     <br />
                   </div>
-                  <div class="modal-footer">
+                  <div className="modal-footer">
                     <button
                       type="button"
-                      class="btn btn-secondary"
+                      className="btn btn-secondary"
                       data-bs-dismiss="modal"
                     >
                       Close
@@ -195,7 +195,7 @@ class ProductRow extends React.Component {
                       onClick={this.editProduct}
                       type="button"
                       data-bs-dismiss="modal"
-                      class="btn btn-primary"
+                      className="btn btn-primary"
                     >
                       Save changes
                     </button>
@@ -217,10 +217,10 @@ class ProductRow extends React.Component {
               <h5 className="card-title">{this.props.name}</h5>
               <p className="card-text">{this.props.description}</p>
               <h5>{"$" + this.props.price}</h5>
-              <div class="d-grid gap-2 d-md-block">
+              <div className="d-grid gap-2 d-md-block">
                 <button
                   type="button"
-                  class="btn btn-primary"
+                  className="btn btn-primary"
                   data-bs-toggle="modal"
                   data-bs-target={"#Producto" + this.props.idObject}
                 >
@@ -229,7 +229,7 @@ class ProductRow extends React.Component {
                 <span> </span>
                 <button
                   onClick={this.removeProduct}
-                  class="btn btn-danger"
+                  className="btn btn-danger"
                   type="button"
                 >
                   Remover
@@ -283,7 +283,7 @@ function Gestion() {
   // Obtiene todos los productos que posteriormente seràn cargados a un dropdown
 
   async function getProducts() {
-    let url = "https://kfashion.cyclic.app/products";
+    let url = "https://kfashionapi.onrender.com/products";
     let res = await fetch(url);
 
     if (res.ok) {
@@ -360,7 +360,7 @@ function Gestion() {
       newProduct.precio = parseInt(newProduct.precio);
       newProduct.cantidad = parseInt(newProduct.cantidad);
       console.log(JSON.stringify(newProduct));
-      await fetch("https://kfashion.cyclic.app/register/product", {
+      await fetch("https://kfashionapi.onrender.com/register/product", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -409,9 +409,7 @@ function Gestion() {
               onChange={(e) => updateForm({ precio: e.target.value })}
             ></input>
             <br />
-            <label className="">
-              Url de la imagen asociada al producto
-            </label>
+            <label className="">Url de la imagen asociada al producto</label>
             <br />
             <input
               value={form.imgSrc}
@@ -444,35 +442,35 @@ function Gestion() {
         </form>
 
         <div
-          class="modal"
+          className="modal"
           id="exampleModal"
           tabindex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="exampleModalLabel">
                   Modal title
                 </h5>
                 <button
                   type="button"
-                  class="btn-close"
+                  className="btn-close"
                   data-bs-dismiss="modal"
                   aria-label="Close"
                 ></button>
               </div>
-              <div class="modal-body"></div>
-              <div class="modal-footer">
+              <div className="modal-body"></div>
+              <div className="modal-footer">
                 <button
                   type="button"
-                  class="btn btn-secondary"
+                  className="btn btn-secondary"
                   data-bs-dismiss="modal"
                 >
                   Close
                 </button>
-                <button type="button" class="btn btn-primary">
+                <button type="button" className="btn btn-primary">
                   Save changes
                 </button>
               </div>
@@ -481,7 +479,7 @@ function Gestion() {
         </div>
       </div>
       <br />
-      <button onClick={submitProduct} type="submit" class="btn btn-dark">
+      <button onClick={submitProduct} type="submit" className="btn btn-dark">
         Agregar producto
       </button>
       <br />

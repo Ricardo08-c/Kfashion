@@ -47,7 +47,7 @@ function Facturacion1() {
     } else {
     }
 //https://kfashionapi.onrender.com
-    await fetch("http://localhost:4001/add/user", {
+    await fetch("https://kfashionapi.onrender.com/add/user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

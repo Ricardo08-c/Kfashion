@@ -46,7 +46,7 @@ function Login1() {
       
       userQuery = [];
       let filteredUser = [];
-      const res1 = await fetch("http://localhost:4001/validUser",{
+      const res1 = await fetch("https://kfashionapi.onrender.com/validUser",{
         method: "POST",
         headers: {
           "Content-Type": "application/json",

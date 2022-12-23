@@ -37,14 +37,17 @@ class PyRcomponent extends React.Component {
   }
   render() {
     return (
-      <div class="col">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">{this.props.usuarioPregunta + ":"}</h5>
-            <p class="card-text">{this.props.pregunta}</p>
+      <div className="col">
+        <div className="card">
+          <div className="card-body">
+            <h5 className="card-title">{this.props.usuarioPregunta + ":"}</h5>
+            <p className="card-text">{this.props.pregunta}</p>
             {this.state.respuesta === "No contestada" ? (
               <div>
-                <button onClick={this.submitAnswer} class="btn btn-secondary">
+                <button
+                  onClick={this.submitAnswer}
+                  className="btn btn-secondary"
+                >
                   Responder
                 </button>
                 <li className="text-white">-</li>
@@ -54,13 +57,13 @@ class PyRcomponent extends React.Component {
                     this.setState({ respuestaInput: e.target.value })
                   }
                   type="text"
-                  class=""
+                  className=""
                 ></input>
               </div>
             ) : (
               <div>
-                <h6 class="card-title">{"Respuesta:"}</h6>
-                <p class="card-text">{this.state.respuesta}</p>
+                <h6 className="card-title">{"Respuesta:"}</h6>
+                <p className="card-text">{this.state.respuesta}</p>
               </div>
             )}
           </div>
@@ -167,17 +170,17 @@ function CatalogBuild() {
     getPreguntas();
   }
 
-  //  if (preguntas.length === 0) return <h2 style = {{minHeight: "100%"}} class="text-white centrado">Cargando...</h2>
+  //  if (preguntas.length === 0) return <h2 style = {{minHeight: "100%"}} className="text-white centrado">Cargando...</h2>
   return (
-    <div style={{ minHeight: "100%" }} class="m-4">
+    <div style={{ minHeight: "100%" }} className="m-4">
       <br></br>
 
       <h2>Preguntas realizadas por usuarios:</h2>
       <br></br>
       <br></br>
-      <div class="row row-cols-1 row-cols-md-2 row-cols-md-3 row-cols-md-4 row-cols-md-5 g-4">
+      <div className="row row-cols-1 row-cols-md-2 row-cols-md-3 row-cols-md-4 row-cols-md-5 g-4">
         {preguntas.length === 0 ? (
-          <h2 style={{ minHeight: "100%" }} class="text-white centrado">
+          <h2 style={{ minHeight: "100%" }} className="text-white centrado">
             Cargando...
           </h2>
         ) : (

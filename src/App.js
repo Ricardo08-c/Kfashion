@@ -1,10 +1,5 @@
 import "./App.css";
-import Historia from "./static/Historia";
 import Home from "./Home";
-import Organigrama from "./static/Organigrama";
-import Descripcion from "./static/Descripcion";
-import Faq from "./static/Faq";
-import Ubicacion from "./static/Ubicacion";
 import Catalogo from "./dynamic/Catalogo";
 import { Carrito } from "./dynamic/Carrito";
 import { Ordersreturn } from "./authClient/Orders";
@@ -28,13 +23,8 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/Historia" element={<Historia />} />
-          <Route path="/Organigrama" element={<Organigrama />} />
-          <Route path="/Descripcion" element={<Descripcion />} />
-          <Route path="/Faq" element={<Faq />} />
           <Route path="/Reporte" element={<Reporte />} />
           <Route path="/PyR" element={<PyR />} />
-          <Route path="/Ubicacion" element={<Ubicacion />} />
           <Route path="/Catalogo" element={<Catalogo />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />

@@ -1,4 +1,3 @@
-import { toHaveAccessibleDescription } from "@testing-library/jest-dom/dist/matchers";
 import React from "react";
 import "../App.css";
 
@@ -89,7 +88,7 @@ class CatalogComponent extends React.Component {
   render() {
     return (
       <tr className="bg-white">
-        <td scope="col">
+        <td>
           <img src={this.props.imgSrc} alt="..." width="100" height="100" />
         </td>
         <td>{this.props.name}</td>
@@ -311,6 +310,7 @@ class Carrito extends React.Component {
     }
     if (sum !== this.state.totalSum) {
       this.state.totalSum = sum;
+      //this.setState({ totalSum: sum });
     }
   };
   componentDidMount() {
@@ -400,7 +400,7 @@ class Carrito extends React.Component {
                           <table className="table table-bordered border-dark">
                             <thead className="thead-dark"></thead>
                             <tbody>
-                              <tr scope="row">
+                              <tr>
                                 <th>
                                   <input
                                     type="checkbox"
@@ -411,7 +411,7 @@ class Carrito extends React.Component {
                                 </th>
                                 <th>₡4500</th>
                               </tr>
-                              <tr scope="row">
+                              <tr>
                                 <th>
                                   <input
                                     type="checkbox"

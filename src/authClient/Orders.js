@@ -102,7 +102,7 @@ class Orders extends React.Component {
     if (res.ok) {
       let text = await res.json();
 
-      let userQuery = [];
+      //let userQuery = [];
       let filteredOrder = [];
       if (this.props.oneUser) {
         filteredOrder = text.filter((orders) => {
@@ -149,11 +149,11 @@ class Orders extends React.Component {
               .filter(
                 (order) =>
                   (dateDif(order.props.date, new Date()) <= 2 &&
-                    this.state.selects == "Últimos 2 días") ||
+                    this.state.selects === "Últimos 2 días") ||
                   (dateDif(order.props.date, new Date()) <= 5 &&
-                    this.state.selects == "Últimos 5 días") ||
+                    this.state.selects === "Últimos 5 días") ||
                   (dateDif(order.props.date, new Date()) <= 30 &&
-                    this.state.selects == "Últimos 30 días") ||
+                    this.state.selects === "Últimos 30 días") ||
                   this.state.selects === "Todas"
               )
               .map((filteredOrder) => (
@@ -280,30 +280,7 @@ class Order extends React.Component {
     window.location.reload();
   };
 
-  cancelarOrden = () => {
-    var soap = require("soap-everywhere");
-    var url = "https://mora.tk/service/xml/facturar.php?wsdl";
-
-    //var item1 = [codigo-int, descripcion-string, cantidad-int, unitario-float, categoria-int]
-    //'var item2 = [codigo-int, descripcion-string, cantidad-int, unitario-float, categoria-int]
-    //var listaItems = [item1, item2]
-    //var factura = [numFactura-int, fecha-date, hora-time, subtotal-float, total-float, listaItems]
-    this.cancelOnMoticaSide();
-    return;
-    var args = {
-      empresa: "Motica",
-      tienda: "Limon",
-      llave: "a29ba73fcae98e4f17a41d73db607395",
-      factura: this.state.numFactura,
-      motivo: this.state.motivo,
-    };
-
-    soap.createClient(url, function (err, client) {
-      client.CancelarVenta(args, function (err, result) {
-        console.log(result);
-      });
-    });
-  };
+  cancelarOrden = () => {};
 
   render() {
     return (

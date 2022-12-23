@@ -17,20 +17,7 @@ async function getUser() {
   }
   return "";
 }
-async function getCanCart() {
-  if (localStorage.getItem("Products") != null) {
-    var products = JSON.parse(localStorage.getItem("Products")) || [];
-    let cant = 0;
-    for (let i = 0; i < products.length; i++) {
-      cant += products[i].cantidad;
-    }
-    if (cant === 0) {
-      return "";
-    }
-    return cant;
-  }
-  return "";
-}
+
 function getCartSize() {
   if (localStorage.getItem("Products") != null) {
     var products = JSON.parse(localStorage.getItem("Products")) || [];
@@ -134,7 +121,8 @@ class Plantilla extends React.Component {
               <li style={{ opacity: 0 }}>-</li>
               <li className="navbar-item">
                 <a href="/" className="navbar-brand text-dark">
-                  <img src={houseImgPath} width="30" height="30" /> Kfashion
+                  <img src={houseImgPath} width="30" height="30" alt="logo" />{" "}
+                  Kfashion
                 </a>
               </li>
             </ul>

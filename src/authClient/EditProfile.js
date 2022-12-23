@@ -4,8 +4,8 @@ import Plantilla from "../static/Plantilla";
 import perfilHombre from "../img/perfilHombre.jpg";
 import perfilMujer from "../img/perfilMujer.png";
 import React from "react";
-import { useParams, useNavigate } from "react-router";
-
+//import { useNavigate } from "react-router";
+/*
 async function fetchIP() {
   let url = "https://api.ipify.org?format=json";
   let res = await fetch(url);
@@ -22,6 +22,7 @@ function Navigates() {
   const navigate = useNavigate();
   navigate("/Perfil");
 }
+*/
 function getUserD() {
   //let  r= await fetchIP();
   //la ip
@@ -89,6 +90,7 @@ class ProfileComponent extends React.Component {
 
     // When a post request is sent to the create url, we'll add a new record to the database.
     let data = getUserD();
+    // eslint-disable-next-line no-lone-blocks
     {
       newPerson._id = data._id;
       //validar si está vacío

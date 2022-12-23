@@ -127,11 +127,15 @@ class CatalogComponent extends React.Component {
 
 function CatalogBuild() {
   const [selects, setSelects] = useState();
+  const [selects2, setSelects2] = useState();
+  const [search, setSearch] = useState();
   const [products, setProducts] = useState([]);
+  const [categorias, setCategorias] = useState([]);
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
     getProducts();
+    getCategorias();
   }, []);
 
   async function getProducts() {
@@ -160,7 +164,7 @@ function CatalogBuild() {
           name={datos.nombre}
           price={datos.price}
           description={datos.description}
-          category={datos.category}
+          category={datos.categoria}
           descuento={datos.descuento}
         />
       );
@@ -168,34 +172,92 @@ function CatalogBuild() {
     setProducts(array2);
   }
 
+  async function getCategorias() {
+    console.log("AAAAAAAAAAA");
+    let url = "https://kfashionapi.onrender.com/get/categorias";
+
+    let res = await fetch(url);
+
+    if (res.ok) {
+      let text = await res.json();
+      array = [];
+      array.push(text);
+    } else {
+      console.log(`HTTP error: ${res.status}`);
+    }
+
+    let array2 = [];
+    let array1 = array[0];
+    for (let i = 0; i < array1.length; i++) {
+      let datos = array1[i];
+      console.log(datos);
+      array2.push(<option>{datos.Categoria}</option>);
+    }
+    setCategorias(array2);
+  }
+
   //if(products.length==0)return <div style = {{minHeight: "100%"}}><h2  className="text-white centrado">Cargando...</h2></div>
   return (
     <div>
       <div style={{ minHeight: "100%" }} className="m-4">
         {/*<h5 className="text-white">Se seleccionó: {selects}</h5>*/}
+        <form>
+          <div className="row">
+            <div className="col">
+              <tag>Buscar:</tag>
+              <input
+                type="text"
+                className="form-control"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              ></input>
+            </div>
+            <div className="col">
+              <tag>Categoría:</tag>
+              <select
+                value={selects}
+                onChange={(e) => setSelects(e.target.value)}
+                className="form-control"
+                aria-label="Default select example"
+              >
+                <option defaultValue={selects}>Todo el cátalogo</option>
+                {categorias}
+              </select>
+            </div>
+            <div className="col">
+              <tag>Filtro:</tag>
+              <select
+                value={selects2}
+                onChange={(e) => setSelects2(e.target.value)}
+                className="form-control"
+                aria-label="Default select example"
+              >
+                <option defaultValue={selects2}>Todo el cátalogo</option>
 
-        <select
-          value={selects}
-          onChange={(e) => setSelects(e.target.value)}
-          className="form-select"
-          aria-label="Default select example"
-        >
-          <option defaultValue={selects}>Todo el cátalogo</option>
-
-          <option>Vestidos</option>
-          <option>Faldas</option>
-          <option>CropTops</option>
-        </select>
+                <option>A-Z</option>
+                <option>Bajo a Alto</option>
+                <option>Alto a Bajo</option>
+              </select>
+            </div>
+          </div>
+        </form>
         <br></br>
 
         <div className="row row-cols-1 row-cols-md-2 row-cols-md-3 row-cols-md-4 row-cols-md-5 g-4">
           {console.log(products)}
+          {console.log(selects)}
           {products
             .filter(
               (product) =>
                 product.props.category === selects ||
                 selects === "Todo el cátalogo" ||
                 selects === undefined
+            )
+            .filter(
+              (product) =>
+                search === undefined ||
+                search === "" ||
+                product.props.name.includes(search)
             )
             .map((filteredProduct) => filteredProduct)}
         </div>

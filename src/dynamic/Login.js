@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import Plantilla from "../static/Plantilla";
 
+
+
 let userQuery = [];
 
 function Login1() {
@@ -23,6 +25,8 @@ function Login1() {
       return `HTTP error: ${res.status}`;
     }
   }
+  
+
   // These methods will update the state properties.
   function updateForm(value) {
     return setForm((prev) => {
@@ -36,25 +40,44 @@ function Login1() {
 
     // When a post request is sent to the create url, we'll add a new record to the database.
 
-    const res = await fetch("https://kfashionapi.onrender.com/get/users");
-    if (res.ok) {
-      let text = await res.json();
-      console.log("json", res);
+    
+      
+      
+      
       userQuery = [];
       let filteredUser = [];
-      filteredUser = text.filter((user) => {
-        return (
-          user.correo === form.correo && user.contrasenha === form.contrasenha
-        );
+      const res1 = await fetch("http://localhost:4001/validUser",{
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({email:form.correo, password:form.contrasenha}),
+      }).catch((error) => {
+        window.alert(error);
+        return;
       });
+      
+      let k = await res1.text()
+      
+      
+      let jsoninfo=JSON.parse(k);
+      if(jsoninfo.user==""){
+        window.alert(jsoninfo.message);
+        return
+      } 
+      window.alert(jsoninfo.message);
+      
+      
+      filteredUser =jsoninfo.user
+      
+      
+      
 
       //buscar si hay una contraseña y el correo igual;
 
-      userQuery = filteredUser;
+      userQuery = [filteredUser];
       getUserFiltered();
-    } else {
-      return `HTTP error: ${res.status}`;
-    }
+    
     setForm({ correo: "", contrasenha: "" });
     //navigate("/Catalogo");
   }
@@ -64,6 +87,8 @@ function Login1() {
       alert("Usuario no registrado");
     } else {
       fetchIP().then((data) => {
+        
+        
         //var id = machineId.machineIdSync();
         //console.log(id); //=> ‘7f1d3f57-29ba-4a64-a0e5-b13a6b5e6d24’
 
@@ -76,6 +101,7 @@ function Login1() {
   };
   // This following section will display the form that takes the input from the user.
   return (
+    
     <div
       style={{ minHeight: "86%", maxWidth: "30%" }}
       className="position-relative alineadoCentroNonRel"

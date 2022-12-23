@@ -87,7 +87,7 @@ class CatalogComponent extends React.Component {
 
   render() {
     return (
-      <tr className="bg-white">
+      <tr className="">
         <td>
           <img src={this.props.imgSrc} alt="..." width="100" height="100" />
         </td>
@@ -106,13 +106,13 @@ class CatalogComponent extends React.Component {
             >
               -
             </button>
-            <li style={{ display: "inline" }} className="text-white">
+            <li style={{ opacity:0, display: "inline" }} className="text-white">
               --
             </li>
 
             {this.props.cantidad}
 
-            <li style={{ display: "inline" }} className="text-white">
+            <li style={{ opacity:0,display: "inline" }} className="text-white">
               --
             </li>
             <button
@@ -220,7 +220,7 @@ async function addToCart(subtotal) {
 
   // Registrar factura electronica
 
-  RegistrarVenta(newOrder2);
+  
   console.log(listaItems);
 
   console.log("order:", newOrder2);
@@ -342,9 +342,17 @@ class Carrito extends React.Component {
     ///window.location.reload();
   };
   handleChangeOrder = (e) => {
+    if(!this.state.checked){
+      this.state.totalSum+=4500;
+    } else {
+      this.state.totalSum-=4500
+    }
     this.setState({ checked: !this.state.checked, checkedServ: false });
   };
   handleChangeOrder1 = (e) => {
+    if(this.state.checked){
+      this.state.totalSum-=4500;
+    }
     this.setState({ checkedServ: !this.state.checkedServ, checked: false });
   };
   render() {
@@ -360,15 +368,15 @@ class Carrito extends React.Component {
                 <br></br>
 
                 <div style={{ marginLeft: "15%", maxWidth: "70%" }}>
-                  <table className="table table-bordered border-dark">
+                  <table className="table table-light ">
                     <thead className="thead-dark">
                       <tr>
-                        <th scope="col">Producto</th>
+                        <th scope="col ">Producto</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Descripcion</th>
                         <th scope="col">Precio unitario</th>
                         <th scope="col">Cantidad</th>
-                        <th c scope="col">
+                        <th  scope="col">
                           Descuento
                         </th>
                         <th scope="col">Total de precios unitarios</th>
@@ -378,7 +386,7 @@ class Carrito extends React.Component {
                     <tbody>
                       {this.productsToCart().map((data) => data)}
 
-                      <tr className="">
+                      <tr scope = "row">
                         <td></td>
                         <td></td>
                         <td></td>
@@ -397,7 +405,7 @@ class Carrito extends React.Component {
                         <h3>Elija un método de entrega</h3>
                         <br></br>
                         <div style={{ marginLeft: "15%", maxWidth: "70%" }}>
-                          <table className="table table-bordered border-dark">
+                          <table className="table table-light table-striped">
                             <thead className="thead-dark"></thead>
                             <tbody>
                               <tr>

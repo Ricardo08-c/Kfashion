@@ -29,8 +29,25 @@ function Facturacion1() {
     // When a post request is sent to the create url, we'll add a new record to the database.
     const newPerson = { ...form };
     //validar si está vacío
-
-    await fetch("https://kfashionapi.onrender.com/add/user", {
+    const res = await fetch("https://kfashionapi.onrender.com/get/users");
+    if (res.ok) {
+      
+      let text = await res.json();
+     
+      console.log(text)
+      for(let i = 0 ; i < text.length; i ++){
+        if(text[i].correo==form.correo){
+          window.alert("Ese correo ya se registró")
+          return
+        }
+      }
+      
+      
+      //buscar si hay una contraseña y el correo igual;
+    } else {
+    }
+//https://kfashionapi.onrender.com
+    await fetch("http://localhost:4001/add/user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

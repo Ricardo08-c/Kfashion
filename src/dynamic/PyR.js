@@ -34,22 +34,58 @@ class PyRcomponent extends React.Component {
       return;
     });
     comp.setState({ respuesta: comp.state.respuestaInput });
+    window.location.reload();
   }
+
+   submitDelete= async (e)   => {
+    let questionId = this.props.idPregunta;;
+    let json = JSON.stringify({ preguntaId: questionId});    
+    await fetch("http://localhost:4001/deleteQuestion", {
+      method: "delete",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: json,
+    }).catch((error) => {
+      window.alert(error);
+      return;
+    });
+    window.alert("Eliminada");
+    window.location.reload();
+  }
+  
   render() {
+    let ip = localStorage.getItem("ipAdress");
+
+    let user = localStorage.getItem(ip);
+    let userobj = JSON.parse(user);
+    
     return (
       <div className="col">
         <div className="card">
           <div className="card-body">
             <h5 className="card-title">{this.props.usuarioPregunta + ":"}</h5>
             <p className="card-text">{this.props.pregunta}</p>
-            {this.state.respuesta === "No contestada" ? (
+            {this.state.respuesta === "No contestada"  && userobj.rol=='EMP'?(
               <div>
                 <button
                   onClick={this.submitAnswer}
-                  className="btn btn-secondary"
+                  className="btn btn-success"
                 >
                   Responder
                 </button>
+                <li className="text-white">-</li>
+                { userobj.rol=='EMP'?
+                
+                <button
+                
+                onClick={this.submitDelete}
+                className="btn btn-danger"
+              >
+                Eliminar
+              </button>
+                :<></>}
+                
                 <li className="text-white">-</li>
                 <input
                   value={this.state.respuestaInput}
@@ -64,6 +100,38 @@ class PyRcomponent extends React.Component {
               <div>
                 <h6 className="card-title">{"Respuesta:"}</h6>
                 <p className="card-text">{this.state.respuesta}</p>
+
+                
+               
+                { userobj.rol=='EMP'?
+                <div>
+                  <input
+                  value={this.state.respuestaInput}
+                  onChange={(e) =>
+                    this.setState({ respuestaInput: e.target.value })
+                  }
+                  type="text"
+                  className=""
+                ></input>
+                 <li className="text-white">-</li>
+                 <button
+                
+                onClick={this.submitAnswer}
+                className="btn btn-primary"
+              >
+                Actualizar respuesta
+              </button>
+              <li className="text-white">-</li>
+              <button
+                
+                onClick={this.submitDelete}
+                className="btn btn-danger"
+              >
+                Eliminar
+              </button>
+                </div>
+               
+                :<></>}
               </div>
             )}
           </div>
@@ -101,19 +169,9 @@ function CatalogBuild() {
     }
 
     let array2 = [];
-    //let array1 = array[0];
-    let array1 = [
-      {
-        usuario: [{ nombre: "Ricardo", apellido: "soto" }],
-        contenido: "Quienes son?",
-        respuesta: "",
-      },
-      {
-        usuario: [{ nombre: "Pedro", apellido: "Juarez" }],
-        contenido: "Descuentos?",
-        respuesta: "A veces",
-      },
-    ];
+    let array1 = array[0];
+    
+    
 
     for (let i = 0; i < array1.length; i++) {
       let datos = array1[i];
@@ -193,9 +251,9 @@ function CatalogBuild() {
       <br></br>
       <br></br>
       <input
-        style={{ minWidth: "40%" }}
+        style={{ minWidth: "40%" ,height:"200px"}}
         type="text"
-        value={form.pregunta}
+        value={form.pregunta}        
         onChange={(e) => updateForm({ pregunta: e.target.value })}
       ></input>
 

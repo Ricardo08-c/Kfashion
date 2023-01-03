@@ -173,7 +173,6 @@ function CatalogBuild() {
   }
 
   async function getCategorias() {
-    console.log("AAAAAAAAAAA");
     let url = "https://kfashionapi.onrender.com/get/categorias";
 
     let res = await fetch(url);

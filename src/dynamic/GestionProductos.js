@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import "../App.css";
 import Plantilla from "../static/Plantilla";
 import React from "react";
-import { wait } from "@testing-library/user-event/dist/utils";
 
 // Array donde se almacenaran los productos
 let array = [];
+let categoriasActuales = [];
 
 // Clase la cual mostrarà los productos con su respectivo MODAL y botones de editar y eliminar
 class ProductRow extends React.Component {
@@ -82,7 +82,7 @@ class ProductRow extends React.Component {
       window.alert(error);
       return;
     });
-    window.location.reload();
+    //window.location.reload();
   };
 
   // Estas funciones son para actualizar el estado de los inputs
@@ -158,25 +158,46 @@ class ProductRow extends React.Component {
                   </div>
                   <div className="modal-body">
                     {console.log("ad->" + this.props.name)}
-                    <label>Nombre:{this.props.name}</label>
+                    <label>Nombre</label>
                     <br />
-                    <input onChange={this.changeName}></input>
+                    <input
+                      defaultValue={this.props.name}
+                      onChange={this.changeName}
+                    ></input>
                     <br />
-                    <label>Precio:{this.props.price}</label>
+                    <label>Precio</label>
                     <br />
-                    <input onChange={this.changePrice}></input>
+                    <input
+                      type="number"
+                      defaultValue={this.props.price}
+                      onChange={this.changePrice}
+                    ></input>
                     <br />
                     <label>Categoria:{this.props.category}</label>
                     <br />
-                    <input onChange={this.changeCategory}></input>
+                    <select
+                      className="form-control w-25"
+                      aria-label="Default select example"
+                      defaultValue={this.props.category}
+                      onChange={this.changeCategory}
+                    >
+                      {categoriasActuales}
+                    </select>
                     <br />
-                    <label>Cantidad:{this.props.cantidad}</label>
+                    <label>Cantidad</label>
                     <br />
-                    <input onChange={this.changeQuantity}></input>
+                    <input
+                      type="number"
+                      defaultValue={this.props.cantidad}
+                      onChange={this.changeQuantity}
+                    ></input>
                     <br />
-                    <label>Descripcion:{this.props.description}</label>
+                    <label>Descripcion</label>
                     <br />
-                    <input onChange={this.changeDescription}></input>
+                    <input
+                      defaultValue={this.props.description}
+                      onChange={this.changeDescription}
+                    ></input>
                     <br />
                     <label>Url de la imagen</label>
                     <br />
@@ -189,7 +210,7 @@ class ProductRow extends React.Component {
                       className="btn btn-secondary"
                       data-bs-dismiss="modal"
                     >
-                      Close
+                      Cerrar
                     </button>
                     <button
                       onClick={this.editProduct}
@@ -197,7 +218,7 @@ class ProductRow extends React.Component {
                       data-bs-dismiss="modal"
                       className="btn btn-primary"
                     >
-                      Save changes
+                      Guardar cambios
                     </button>
                   </div>
                 </div>
@@ -246,7 +267,9 @@ class ProductRow extends React.Component {
 }
 
 function Gestion() {
+  const [selects, setSelects] = useState();
   const [products, setProducts] = useState([]);
+  const [categorias, setCategorias] = useState([]);
 
   const [form, setForm] = useState({
     nombre: "",
@@ -277,8 +300,33 @@ function Gestion() {
   // Llama la funcion al renderizar la pagina
 
   useEffect(() => {
+    getCategorias();
     getProducts();
   }, []);
+
+  async function getCategorias() {
+    let url = "https://kfashionapi.onrender.com/get/categorias";
+
+    let res = await fetch(url);
+
+    if (res.ok) {
+      let text = await res.json();
+      array = [];
+      array.push(text);
+    } else {
+      console.log(`HTTP error: ${res.status}`);
+    }
+
+    let array2 = [];
+    let array1 = array[0];
+    for (let i = 0; i < array1.length; i++) {
+      let datos = array1[i];
+      console.log(datos);
+      array2.push(<option>{datos.Categoria}</option>);
+    }
+    setCategorias(array2);
+    categoriasActuales = array2;
+  }
 
   // Obtiene todos los productos que posteriormente seràn cargados a un dropdown
 
@@ -299,6 +347,8 @@ function Gestion() {
     for (let i = 0; i < array1.length; i++) {
       let datos = Object.values(array1[i]);
       console.log(datos[0]);
+      console.log("-ñ-ñ-ñ");
+      console.log(categorias);
       array2.push(
         <ProductRow
           imgSrc={datos[1]}
@@ -328,7 +378,7 @@ function Gestion() {
     }
 
     if (!form.nombre.length) {
-      alert("Debes poner una nombre a la promocion");
+      alert("Debes poner una nombre a la producto");
       return;
     }
 
@@ -390,10 +440,14 @@ function Gestion() {
             <br />
             <label className="">Categoria del producto</label>
             <br />
-            <input
-              value={form.categoria}
-              onChange={(e) => updateForm({ categoria: e.target.value })}
-            ></input>
+            <select
+              value={selects}
+              onChange={(e) => setSelects(e.target.value)}
+              className="form-control w-25"
+              aria-label="Default select example"
+            >
+              {categorias}
+            </select>
             <br />
             <label className="">Descripcion del producto</label>
             <br />

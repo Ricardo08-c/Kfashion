@@ -12,12 +12,7 @@ function Gestion() {
 
   const [form, setForm] = useState({
     nombre: "",
-    categoria: "",
-    descripcion: "",
-    precio: "",
-    imgSrc: "",
-    cantidad: "",
-    estado: "activo",
+    nombreEdicion: "",
   });
 
   // Variables para el filtrado de busqueda por nombre
@@ -60,7 +55,7 @@ function Gestion() {
     for (let i = 0; i < array1.length; i++) {
       let datos = array1[i];
       console.log(datos);
-      array2.push(<option>{datos.Categoria}</option>);
+      array2.push(<option defaultValue={datos._id}>{datos.Categoria}</option>);
     }
     setCategorias(array2);
   }
@@ -69,18 +64,72 @@ function Gestion() {
 
   // Agrega un nuevo producto siempre y cuando se cumplan las validaciones
 
+  async function editCategoria() {
+    let idToRemove;
+    for (var i = 0; i < categorias.length; i++) {
+      if (selects === categorias[i]["props"]["children"])
+        idToRemove = categorias[i]["props"]["defaultValue"];
+    }
+    console.log("ID A EDITAR -> " + idToRemove);
+    console.log("asd -> " + form.nombreEdicion);
+
+    let json = JSON.stringify({
+      id: idToRemove,
+      Categoria: form.nombreEdicion,
+    });
+
+    await fetch("https://kfashionapi.onrender.com/updateCategoria", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: json,
+    }).catch((error) => {
+      window.alert(error);
+      return;
+    });
+    window.location.reload();
+  }
+
+  async function removeCategoria() {
+    console.log("blabla");
+    console.log("ID A REMOVER -> " + selects);
+    console.log("ID A REMOVER -> " + JSON.stringify(categorias));
+
+    let idToRemove;
+    for (var i = 0; i < categorias.length; i++) {
+      if (selects === categorias[i]["props"]["children"])
+        idToRemove = categorias[i]["props"]["defaultValue"];
+    }
+
+    let json = JSON.stringify({ _id: idToRemove });
+    console.log(json);
+    fetch("https://kfashionapi.onrender.com/remove/categoria", {
+      method: "delete",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: json,
+    }).catch((error) => {
+      window.alert(error);
+      return;
+    });
+    alert("Categoria removida");
+    window.location.reload();
+  }
+
   async function submitCategoria(e) {
     let ip = localStorage.getItem("ipAdress");
 
     let user = localStorage.getItem(ip);
 
     if (!user) {
-      alert("Debes iniciar secion como empleado para gestionar productos");
+      alert("Debes iniciar secion como empleado para gestionar categorias");
       return;
     }
 
     if (!form.nombre.length) {
-      alert("Debes poner una nombre a la producto");
+      alert("Debes poner una nombre a la categoria");
       return;
     } else {
       const newCategoria = { ...form };
@@ -125,26 +174,26 @@ function Gestion() {
       <label>Editar categoria</label>
       <select
         value={selects}
-        onChange={(e) => setSelects(e.target.value)}
+        onChange={(e) => setSelects((form.nombreEdicion = e.target.value))}
         className="form-control"
         aria-label="Default select example"
       >
         {categorias}
       </select>
       <br></br>
-      <input className="" value={selects}></input>
+      <input
+        className=""
+        onChange={(e) => updateForm({ nombreEdicion: e.target.value })}
+        value={form.nombreEdicion}
+      ></input>
       <br></br>
       <br></br>
-      <button
-        onClick={submitCategoria}
-        type="submit"
-        className="btn btn-primary"
-      >
+      <button onClick={editCategoria} type="submit" className="btn btn-primary">
         Guardar Cambios
       </button>
       <span>-</span>
       <button
-        onClick={submitCategoria}
+        onClick={removeCategoria}
         type="submit"
         className="btn btn-danger"
       >

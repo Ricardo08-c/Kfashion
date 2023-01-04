@@ -17,6 +17,7 @@ import GestionPromociones from "./dynamic/GestionPromociones";
 import GestionOfertas from "./dynamic/GestionOfertas";
 import CancelarFactura from "./dynamic/CancelarFactura";
 import Reporte from "./dynamic/GraphicsView";
+import DynamicOrder from "./dynamic/dynamicorder";
 import GestionCategorias from "./dynamic/Categorias";
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
           <Route path="/Carrito" element={<Carrito />} />
           <Route path="/Orders" element={<Ordersreturn />} />
           <Route path="/Perfil" element={<Perfil />} />
+          <Route path="/DynamicOrder:id" element={<DynamicOrder />} />
           <Route path="/PreguntasyRespuestas" element={<PyR />} />
           <Route path="/FormularioContacto" element={<FormularioContacto />} />
           <Route path="/bannerPromociones" element={<Promociones />} />

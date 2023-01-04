@@ -13,7 +13,7 @@ class CancelarFacturacion extends React.Component {
     let a = (
       <Orders oneUser={false} dataToDisplay={false} cancel={true}></Orders>
     );
-    console.log(a.props);
+    
     return (
       <div style={{ minHeight: "85%" }} className="text-white ">
         <div style={{ left: "10%" }}></div>

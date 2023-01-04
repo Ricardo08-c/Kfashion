@@ -4,6 +4,7 @@ import "../App.css";
 import Plantilla from "../static/Plantilla";
 
 import { CatalogComponent } from "../dynamic/Carrito";
+
 function dateDif(a, b) {
   const date1 = a;
   const date2 = b;
@@ -13,6 +14,30 @@ function dateDif(a, b) {
   return diffDays;
 }
 
+const getDatesBetween = (startDate, endDate, includeEndDate) => {
+  const dates = [];
+  const currentDate = startDate;
+
+  currentDate.setDate(currentDate.getDate() + 1);
+
+  while (currentDate < endDate) {
+    dates.push(new Date(currentDate).toLocaleDateString());
+    currentDate.setDate(currentDate.getDate() + 1);
+  }
+  if (includeEndDate) dates.push(endDate.toLocaleDateString());
+  endDate.setDate(endDate.getDate() + 1);
+  dates.push(new Date(endDate).toLocaleDateString());
+  return dates;
+};
+var searchArray = function(arr, regex) {
+  var matches=[], i;
+  
+  for (i=0; i<arr.length; i++) {
+    let nom  = arr[i].objUser[0].nombre + arr[i].objUser[0].apellido    
+    if (nom.match(regex)) matches.push(arr[i]);
+  }
+  return matches;
+};
 function Ordersreturn() {
   return (
     <Plantilla
@@ -27,24 +52,109 @@ class Orders extends React.Component {
     this.state = {
       oneUser: this.props.oneUser,
       orders: [],
+      fechaini:"",
+      fechafin:"",
       selects: "Todas",
+      labels: [],
+      oldOrders:[]
     };
   }
 
+  mapOrdersByDate = (canceladas) => {
+    let datamap = [];
+    console.log(this.state.fechafin, this.state.fechaini,this.state.oldOrders)
+
+    for (let i = 0; i < this.state.labels.length; i++) {
+      let row = [];
+      for (let j = 0; j < this.state.oldOrders.length; j++) {
+        if (
+          new Date(this.state.oldOrders[j].fecha).toLocaleDateString() ===
+          this.state.labels[i]
+        ) {
+          if (canceladas) {
+            if (this.state.oldOrders[j].estado === "Cancelada") {
+              row.push(this.state.orders[j]);
+            }
+          } else if (this.state.oldOrders[j].estado === "Facturado") {
+            row.push(this.state.oldOrders[j]);
+          }
+        }
+      }
+      datamap.push(row);
+    }
+
+    return datamap;
+  };
+
+  componentDidMount = () => {
+    this.takeOrdersUser().then(() => {});
+    
+
+  };
+  getLabels = () => {
+    return getDatesBetween(
+      new Date(this.state.fechaini),
+      new Date(this.state.fechafin),
+      true
+    );
+  };
   getDataOrders = () => {
     return this.state.orders;
   };
+  displayDates = (e) => {
+    this.state.fechafin = e.target.value;
+    this.state.labels = this.getLabels();
+    
+      let ord  = this.mapOrdersByDate(false);
+      console.log(ord)
+      let newOrders =[]
+      for (let i = 0 ; i < ord.length; i++){
+        for (let j = 0 ; j < ord[i].length; j++){
+          newOrders.push(ord[i][j])
+        }
+
+      }
+      console.log(newOrders)
+      if(this.state.fechaini!= "" && this.state.fechafin!= "" && this.state.orders!= newOrders){
+        this.state.orders = newOrders      
+        this.forceUpdate()
+      }
+      
+
+    this.forceUpdate();
+  };
+  displayDatesStart = (e) => {
+    this.state.fechaini = e.target.value;    
+    this.state.labels = this.getLabels();
+    
+    let ord  = this.mapOrdersByDate(false);
+    console.log(ord)
+    let newOrders =[]
+    for (let i = 0 ; i < ord.length; i++){
+      for (let j = 0 ; j < ord[i].length; j++){
+        newOrders.push(ord[i][j])
+      }
+
+    }
+    console.log(newOrders)
+    if(this.state.fechaini!= "" && this.state.fechafin!= "" && this.state.orders!= newOrders){
+      this.state.orders = newOrders
+    }
+    this.forceUpdate();
+  };
+
   componentDidUpdate() {
     if (
       this.props.dataToDisplay &&
       this.props.dataToDisplay !== this.state.orders
     ) {
       this.state.orders = this.props.dataToDisplay;
-
+      
       this.forceUpdate();
       console.log(this.orders());
     }
   }
+      
   componentDidMount() {
     if (!this.props.dataToDisplay) {
       this.takeOrdersUser().then((data) => {});
@@ -72,7 +182,7 @@ class Orders extends React.Component {
       }
       let ts = this.state.orders[i].fecha || this.state.orders[i].fecha;
       let date = new Date(ts);
-
+      
       k.push(
         <Order
           estado={this.state.orders[i].estado}
@@ -104,13 +214,17 @@ class Orders extends React.Component {
 
       //let userQuery = [];
       let filteredOrder = [];
+      
+      
       if (this.props.oneUser) {
         filteredOrder = text.filter((orders) => {
+      
           return orders.user === userId._id;
         });
-        this.setState({ orders: filteredOrder });
-      } else {
-        this.setState({ orders: text });
+        
+        this.setState({ orders: filteredOrder,oldOrders:text });
+      } else {       
+        this.setState({ orders: text, oldOrders:text });
       }
 
       //buscar si hay una contraseña y el correo igual;
@@ -118,53 +232,79 @@ class Orders extends React.Component {
       return `HTTP error: ${res.status}`;
     }
   };
+  filterByName = (e)=>{
+    let val = e.target.value;
+    let arr = searchArray(this.state.oldOrders,val);
+    this.setState({orders:arr})
+
+  }
+
+
+  
   render() {
     let order1 = this.orders();
+    
+    
+    
     return (
-      <div style={{ minHeight: "86%" }} className=" position-relative">
+      <div style={{ minHeight: "86%" }} className=" text-dark position-relative">
         <br></br>
         <h3 className="">Ordenes:</h3>
         <br></br>
         <h5 style={{ display: "inline", left: "10%" }} className="">
           Filtrar{" "}
         </h5>
-        <select
-          style={{ display: "inline", maxWidth: "15%" }}
-          value={this.state.selects}
-          onChange={this.setSelects}
-          className="form-select"
-        >
-          <option defaultValue={this.state.selects}>Todas</option>
-
-          <option>Últimos 2 días</option>
-          <option>Últimos 5 días</option>
-          <option>Últimos 30 días</option>
-        </select>
+        <div className="  form-group">
+              <label style={{ display: "inline" }} className="" htmlFor="name">
+                Fecha de Inicio{" "}
+              </label>
+              <input
+                style={{ maxWidth: "15%", display: "inline" }}
+                type="date"
+                className="form-control"
+                id="name"
+                onChange={this.displayDatesStart}
+              />
+              <li style={{ display: "inline", opacity: "0" }}>-----</li>
+              <label style={{ display: "inline" }} className="" htmlFor="name">
+                Fecha Fin{" "}
+              </label>
+              <input
+                style={{ maxWidth: "15%", display: "inline" }}
+                type="date"
+                className="form-control"
+                id="name"
+                
+                onChange={this.displayDates}
+              />
+            </div>
+            <br></br>
+            {!this.props.oneUser ?
+                 <input
+                 style={{ maxWidth: "15%", display: "inline" }}
+                 type="text"
+                 className="form-control"
+                 id="name"
+                 placeholder="Filtrar por nombre de usuario"
+                 onChange={this.filterByName}
+               />
+            :<></>}
         <br></br>
         <br></br>
         <br></br>
         {this.state.orders.length > 0 ? (
           <div>
-            {order1
-              .filter(
-                (order) =>
-                  (dateDif(order.props.date, new Date()) <= 2 &&
-                    this.state.selects === "Últimos 2 días") ||
-                  (dateDif(order.props.date, new Date()) <= 5 &&
-                    this.state.selects === "Últimos 5 días") ||
-                  (dateDif(order.props.date, new Date()) <= 30 &&
-                    this.state.selects === "Últimos 30 días") ||
-                  this.state.selects === "Todas"
-              )
+            {order1            
+              
               .map((filteredOrder) => (
+                
                 <div>
+                  
                   <div>
                     <h5 className="">
                       {"Orden #" + filteredOrder.props.index}
                     </h5>
-                    <h5 className="">
-                      {"Numero de factura: " + filteredOrder.props.numFactura}
-                    </h5>
+                    
                     <h5 className="">
                       {"Estado: " + filteredOrder.props.estado}
                     </h5>
@@ -280,7 +420,9 @@ class Order extends React.Component {
     window.location.reload();
   };
 
-  cancelarOrden = () => {};
+  cancelarOrden = () => {
+    this.cancelOnMoticaSide().then(()=>{})
+  };
 
   render() {
     return (

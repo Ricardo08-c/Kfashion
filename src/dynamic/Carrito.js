@@ -2,7 +2,7 @@ import React from "react";
 import "../App.css";
 
 import Plantilla from "../static/Plantilla";
-
+import emailjs from "@emailjs/browser";
 let array = [];
 
 class CatalogComponent extends React.Component {
@@ -20,6 +20,7 @@ class CatalogComponent extends React.Component {
       functionAlter: this.props.functionAlter,
       editable: this.props.editable,
       descuento: this.props.descuento,
+      insertedId :""
     };
   }
 
@@ -193,26 +194,12 @@ async function addToCart(subtotal) {
     ]);
   }
 
-  let url = "https://kfashionapi.onrender.com/numFactura";
-  let res = await fetch(url);
-  if (res.ok) {
-    let text = await res.json();
-    array = [];
-    array.push(text);
-  } else {
-    console.log(`HTTP error: ₡{res.status}`);
-  }
-  let array1 = array[0];
-  let numFactura = array1[0].numFactura;
-
-  // Order nuevo
-  numFactura = numFactura + 1;
+  
   console.log("asddas");
-  console.log(numFactura);
+  
   let total = subtotal + subtotal * (13 / 100); //SE LE APLICA EL IVA
   let newOrder2 = {
     user: userobj._id,
-    numFactura,
     subtotal,
     total,
     listaItems,
@@ -224,8 +211,10 @@ async function addToCart(subtotal) {
   console.log(listaItems);
 
   console.log("order:", newOrder2);
+  
 
-  await fetch("https://kfashionapi.onrender.com/register/order2", {
+
+  let res = await fetch("https://kfashionapi.onrender.com/register/order2", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -235,6 +224,31 @@ async function addToCart(subtotal) {
     window.alert(error);
     return;
   });
+  if(res.ok){
+    let data = await res.json()
+    console.log(data)
+    let insertedId = data.insertedId;
+    
+      //Estableciendo los atributos del formulario
+      
+  
+      //Envío del email
+     
+      let form =  {nombre:userobj.nombre,link:window.location.origin+"/"+"DynamicOrder:"+insertedId};
+      emailjs
+      .send("service_rqo4y0f", "template_1e147vw", form, "OgiARypVGqnVEZeLu")
+        
+        .then((response) => {
+          alert(
+            "Su mensaje ha sido enviado con éxito, nuestro servicio al cliente se pondrá en contacto con usted al correo suministrado"
+          );
+          return console.log(response);
+        })
+        .catch((error) =>
+          alert("error en el envío, verifique los datos y conexión")
+        );
+    }
+  
 }
 
 class Carrito extends React.Component {
@@ -330,20 +344,22 @@ class Carrito extends React.Component {
     }
     this.setState({ cartConfirmed: !this.state.cartConfirmed });
   };
-
+   
   confirmOrder = () => {
     addToCart(this.state.totalSum).then(
       alert(
         "Tu orden se ha registrado correctamente",
         this.setState({ cartConfirmed: !this.state.cartConfirmed }),
-        localStorage.removeItem("Products")
+        localStorage.removeItem("Products"),        
       )
     );
+    this.submit().then(()=>{})
     ///window.location.reload();
   };
   handleChangeOrder = (e) => {
     if(!this.state.checked){
       this.state.totalSum+=4500;
+
     } else {
       this.state.totalSum-=4500
     }

@@ -72,7 +72,7 @@ class Orders extends React.Component {
       }
       let ts = this.state.orders[i].fecha || this.state.orders[i].fecha;
       let date = new Date(ts);
-
+      
       k.push(
         <Order
           estado={this.state.orders[i].estado}
@@ -104,12 +104,16 @@ class Orders extends React.Component {
 
       //let userQuery = [];
       let filteredOrder = [];
+      
+      
       if (this.props.oneUser) {
         filteredOrder = text.filter((orders) => {
+      
           return orders.user === userId._id;
         });
+        
         this.setState({ orders: filteredOrder });
-      } else {
+      } else {       
         this.setState({ orders: text });
       }
 
@@ -120,8 +124,9 @@ class Orders extends React.Component {
   };
   render() {
     let order1 = this.orders();
+    console.log(order1)
     return (
-      <div style={{ minHeight: "86%" }} className=" position-relative">
+      <div style={{ minHeight: "86%" }} className=" text-dark position-relative">
         <br></br>
         <h3 className="">Ordenes:</h3>
         <br></br>
@@ -145,26 +150,29 @@ class Orders extends React.Component {
         <br></br>
         {this.state.orders.length > 0 ? (
           <div>
-            {order1
-              .filter(
+            {order1            
+              .filter(                
                 (order) =>
+                
                   (dateDif(order.props.date, new Date()) <= 2 &&
+                  
                     this.state.selects === "Últimos 2 días") ||
                   (dateDif(order.props.date, new Date()) <= 5 &&
                     this.state.selects === "Últimos 5 días") ||
                   (dateDif(order.props.date, new Date()) <= 30 &&
                     this.state.selects === "Últimos 30 días") ||
                   this.state.selects === "Todas"
+                  
               )
               .map((filteredOrder) => (
+                
                 <div>
+                  {console.log(filteredOrder)}
                   <div>
                     <h5 className="">
                       {"Orden #" + filteredOrder.props.index}
                     </h5>
-                    <h5 className="">
-                      {"Numero de factura: " + filteredOrder.props.numFactura}
-                    </h5>
+                    
                     <h5 className="">
                       {"Estado: " + filteredOrder.props.estado}
                     </h5>
@@ -280,7 +288,9 @@ class Order extends React.Component {
     window.location.reload();
   };
 
-  cancelarOrden = () => {};
+  cancelarOrden = () => {
+    this.cancelOnMoticaSide().then(()=>{})
+  };
 
   render() {
     return (

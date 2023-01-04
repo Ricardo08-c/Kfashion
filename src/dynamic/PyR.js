@@ -40,7 +40,7 @@ class PyRcomponent extends React.Component {
    submitDelete= async (e)   => {
     let questionId = this.props.idPregunta;;
     let json = JSON.stringify({ preguntaId: questionId});    
-    await fetch("http://localhost:4001/deleteQuestion", {
+    await fetch("https://kfashionapi.onrender.com/deleteQuestion", {
       method: "delete",
       headers: {
         "Content-Type": "application/json",

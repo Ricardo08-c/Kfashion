@@ -352,7 +352,11 @@ function Gestion() {
     for (let i = 0; i < array1.length; i++) {
       let datos = Object.values(array1[i]);
       console.log(datos[0]);
-      array2.push(<option value={datos[0]}>{datos[5]}</option>);
+      array2.push(
+        <option value={datos[0]}>
+          {datos[5]}-{datos[3]}
+        </option>
+      );
     }
     setProducts(array2);
   }

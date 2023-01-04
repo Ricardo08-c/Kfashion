@@ -54,7 +54,6 @@ class Plantilla extends React.Component {
   productOrders = () => {};
 
   componentDidMount() {
-    
     getUser().then((data) => this.setState({ user: data }));
   }
   logout = (e) => {
@@ -65,7 +64,6 @@ class Plantilla extends React.Component {
   };
 
   render() {
-    
     let ip = localStorage.getItem("ipAdress") || "false";
     let user = localStorage.getItem(ip) || "{}";
     let userj = JSON.parse(user);
@@ -212,9 +210,9 @@ class Plantilla extends React.Component {
                             <li>
                               <a
                                 className="dropdown-item text-white"
-                                href="/Ofertas"
+                                href="/Categorias"
                               >
-                                Gestionar Ofertas
+                                Gestionar Categorias
                               </a>
                             </li>
                             <li>

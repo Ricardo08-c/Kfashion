@@ -179,6 +179,7 @@ class ProductRow extends React.Component {
                       className="form-control w-25"
                       aria-label="Default select example"
                       defaultValue={this.props.category}
+                      style={{ position: "relative", left: "37%" }}
                       onChange={this.changeCategory}
                     >
                       {categoriasActuales}
@@ -444,20 +445,20 @@ function Gestion() {
               onChange={(e) => updateForm({ nombre: e.target.value })}
             ></input>
             <br />
-            
+
             <label className="">Categoria del producto</label>
             <br />
             <select
               value={selects}
               onChange={(e) => setSelects((form.categoria = e.target.value))}
               className="form-control w-25"
-              style={{position:"relative",left:"37%"}}
+              style={{ position: "relative", left: "37%" }}
               aria-label="Default select example"
             >
               <option></option>
               {categorias}
             </select>
-            
+
             <label className="">Descripcion del producto</label>
             <br />
             <input

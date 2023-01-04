@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "../App.css";
 import Plantilla from "../static/Plantilla";
 import React from "react";
-
+import FileBase64 from "react-file-base64";
 // Array donde se almacenaran los productos
 let array = [];
 let categoriasActuales = [];
@@ -82,7 +82,7 @@ class ProductRow extends React.Component {
       window.alert(error);
       return;
     });
-    //window.location.reload();
+    window.location.reload();
   };
 
   // Estas funciones son para actualizar el estado de los inputs
@@ -125,8 +125,8 @@ class ProductRow extends React.Component {
   changeUrl = (e) => {
     console.log("ID A EDITAR -> " + this.props.idObject);
     console.log(this.state.imgSrc);
-    console.log("input->" + e.target.value);
-    this.setState({ imgSrc: e.target.value });
+    console.log("input->" + e.target);
+    this.setState({ imgSrc: e.target });
   };
 
   render() {
@@ -199,9 +199,12 @@ class ProductRow extends React.Component {
                       onChange={this.changeDescription}
                     ></input>
                     <br />
-                    <label>Url de la imagen</label>
+                    <label>Imagen</label>
                     <br />
-                    <input onChange={this.changeUrl}></input>
+                    <FileBase64
+                      multiple={false}
+                      onDone={({ base64 }) => this.setState({ imgSrc: base64 })}
+                    />
                     <br />
                   </div>
                   <div className="modal-footer">
@@ -372,6 +375,9 @@ function Gestion() {
 
     let user = localStorage.getItem(ip);
 
+    console.log("ads");
+    console.log(form.categoria);
+
     if (!user) {
       alert("Debes iniciar secion como empleado para gestionar productos");
       return;
@@ -398,7 +404,7 @@ function Gestion() {
     }
 
     if (!form.imgSrc.length) {
-      alert("Debes poner el url de la imagen del producto");
+      alert("Debes agregarle una imagen del producto");
       return;
     }
 
@@ -442,10 +448,11 @@ function Gestion() {
             <br />
             <select
               value={selects}
-              onChange={(e) => setSelects(e.target.value)}
+              onChange={(e) => setSelects((form.categoria = e.target.value))}
               className="form-control w-25"
               aria-label="Default select example"
             >
+              <option></option>
               {categorias}
             </select>
             <br />
@@ -463,12 +470,12 @@ function Gestion() {
               onChange={(e) => updateForm({ precio: e.target.value })}
             ></input>
             <br />
-            <label className="">Url de la imagen asociada al producto</label>
+            <label className="">Imagen asociada al producto</label>
             <br />
-            <input
-              value={form.imgSrc}
-              onChange={(e) => updateForm({ imgSrc: e.target.value })}
-            ></input>
+            <FileBase64
+              multiple={false}
+              onDone={({ base64 }) => updateForm({ imgSrc: base64 })}
+            />
             <br />
             <label className="">Cantidad en Stock del producto</label>
             <br />

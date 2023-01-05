@@ -21,6 +21,7 @@ class CatalogComponent extends React.Component {
     };
   }
   addToCart = (e) => {
+    
     let obj = {
       id: this.props.id,
       imgSrc: this.props.imgSrc,
@@ -52,7 +53,7 @@ class CatalogComponent extends React.Component {
       products.push({
         cantidad: 1,
         id: obj.id,
-        imgSrc: obj.imgSrc,
+        
         name: obj.name,
         description: obj.description,
         price: obj.price,

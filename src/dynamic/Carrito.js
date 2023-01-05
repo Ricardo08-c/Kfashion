@@ -239,15 +239,14 @@ async function addToCart(subtotal) {
       .send("service_rqo4y0f", "template_1e147vw", form, "OgiARypVGqnVEZeLu")
         
         .then((response) => {
-          alert(
-            "Su mensaje ha sido enviado con éxito, nuestro servicio al cliente se pondrá en contacto con usted al correo suministrado"
-          );
+          window.location.reload()
           return console.log(response);
         })
         .catch((error) =>
-          alert("error en el envío, verifique los datos y conexión")
+        alert("error en el envío, verifique los datos y conexión")
         );
     }
+    
   
 }
 
@@ -261,8 +260,41 @@ class Carrito extends React.Component {
       checked: false,
       checkedServ: false,
       editable: this.props.editable,
+      productsLoaded:[]
     };
     this.change();
+  }
+  
+
+  productsFetcher= async () =>{
+    let url = "https://kfashionapi.onrender.com/products";
+    let res = await fetch(url);
+    
+    if (res.ok) {
+      let text = await res.json();
+
+      //let userQuery = [];
+      
+      
+      
+      
+        this.setState({ productsLoaded: text });
+      
+
+      //buscar si hay una contraseña y el correo igual;
+    } else {
+      return `HTTP error: ${res.status}`;
+    }
+  
+
+  }
+  getImageSource=(id)=>{
+      for(let i = 0 ; i < this.state.productsLoaded.length; i ++){
+        if(this.state.productsLoaded[i]._id==id){
+          return this.state.productsLoaded[i].imgSrc;
+        }
+
+      }
   }
 
   productsToCart = () => {
@@ -291,7 +323,7 @@ class Carrito extends React.Component {
           functionAlter={this.change}
           cantidad={datos.cantidad}
           id={datos.id}
-          imgSrc={datos.imgSrc}
+          imgSrc={this.getImageSource(datos.id)}
           name={datos.name}
           price={datos.price}
           description={datos.description}
@@ -307,6 +339,7 @@ class Carrito extends React.Component {
   change = () => {
     let products = JSON.parse(localStorage.getItem("Products")) || [];
     this.setState({ productsA: products });
+
 
     let sum = 0;
 
@@ -333,6 +366,8 @@ class Carrito extends React.Component {
     if (JSON.stringify(products) !== JSON.stringify(this.state.productsA)) {
       this.setState({ productsA: products });
     }
+    this.productsFetcher().then(()=>{});
+    
   }
   authorizeCart = () => {
     let user = localStorage.getItem(localStorage.getItem("ipAdress")) || false;

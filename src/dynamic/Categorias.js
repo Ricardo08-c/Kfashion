@@ -175,7 +175,8 @@ function Gestion() {
       <select
         value={selects}
         onChange={(e) => setSelects((form.nombreEdicion = e.target.value))}
-        className="form-control"
+        className="form-control w-25"
+        style={{ position: "relative", left: "37%" }}
         aria-label="Default select example"
       >
         {categorias}

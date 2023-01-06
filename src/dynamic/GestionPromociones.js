@@ -52,7 +52,7 @@ class BannerComponent extends React.Component {
     console.log("ID A EDITAR -> " + this.state.idObject);
     console.log("FECHA INICIO -> " + this.state.fechaInicio);
     console.log("FECHA FINAL -> " + this.state.fechaFinal);
-    console.log("PRODUCTO -> " + this.state.producto);
+    console.log("PRODUCTO -> " + this.state.producto._id);
     console.log("PORCENTAJE -> " + this.state.porcentaje);
 
     let json = JSON.stringify({
@@ -186,7 +186,9 @@ class BannerComponent extends React.Component {
             <div className="bannerAgrupacion">
               <div className="textoBanner">
                 <p>
-                  {this.props.descripcion}: {this.props.productoNombre},{" "}
+                  {this.props.descripcion}: {this.props.productoNombre},
+                  {this.props.descripcionProducto}
+                  {": "}
                   {this.props.porcentaje}% de descuento Válido desde{" "}
                   {this.props.fechaInicio} hasta el {this.props.fechaFinal}
                 </p>
@@ -265,9 +267,10 @@ function Gestion() {
       let datos = array1[i];
       array2.push(
         <BannerComponent
-          porcentaje={datos.porcentaje}
+          porcentaje={datos.producto[0].descuento}
           producto={datos.producto[0]}
           productoNombre={datos.producto[0].nombre}
+          descripcionProducto={datos.producto[0].description}
           descripcion={datos.descripcion}
           fechaInicio={datos.fechaInicio}
           fechaFinal={datos.fechaFinal}

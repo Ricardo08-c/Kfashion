@@ -21,7 +21,9 @@ class BannerComponent extends React.Component {
       <div className="bannerAgrupacion">
         <div className="textoBanner">
           <p>
-            {this.props.descripcion}: {this.props.producto},{" "}
+            {this.props.descripcion}: {this.props.productoNombre},
+            {this.props.descripcionProducto}
+            {": "}
             {this.props.porcentaje}% de descuento Válido desde{" "}
             {this.props.fechaInicio} hasta el {this.props.fechaFinal}
           </p>
@@ -63,11 +65,14 @@ function BannerBuild() {
       let datos = array1[i];
       array2.push(
         <BannerComponent
-          porcentaje={datos.porcentaje}
-          producto={datos.producto[0].nombre}
+          porcentaje={datos.producto[0].descuento}
+          producto={datos.producto[0]}
+          productoNombre={datos.producto[0].nombre}
+          descripcionProducto={datos.producto[0].description}
           descripcion={datos.descripcion}
           fechaInicio={datos.fechaInicio}
           fechaFinal={datos.fechaFinal}
+          idObject={datos._id}
         />
       );
     }

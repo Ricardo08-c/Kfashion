@@ -21,7 +21,6 @@ class CatalogComponent extends React.Component {
     };
   }
   addToCart = (e) => {
-    
     let obj = {
       id: this.props.id,
       imgSrc: this.props.imgSrc,
@@ -53,7 +52,7 @@ class CatalogComponent extends React.Component {
       products.push({
         cantidad: 1,
         id: obj.id,
-        
+
         name: obj.name,
         description: obj.description,
         price: obj.price,
@@ -224,21 +223,7 @@ function CatalogBuild() {
                 {categorias}
               </select>
             </div>
-            <div className="col">
-              <tag>Filtro:</tag>
-              <select
-                value={selects2}
-                onChange={(e) => setSelects2(e.target.value)}
-                className="form-control"
-                aria-label="Default select example"
-              >
-                <option defaultValue={selects2}>Todo el cátalogo</option>
-
-                <option>A-Z</option>
-                <option>Bajo a Alto</option>
-                <option>Alto a Bajo</option>
-              </select>
-            </div>
+            <div className="col"></div>
           </div>
         </form>
         <br></br>
@@ -257,7 +242,8 @@ function CatalogBuild() {
               (product) =>
                 search === undefined ||
                 search === "" ||
-                product.props.name.includes(search)
+                product.props.name.includes(search) ||
+                product.props.description.includes(search)
             )
             .map((filteredProduct) => filteredProduct)}
         </div>

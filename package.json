@@ -22,6 +22,7 @@
     "react-scripts": "5.0.1",
     "soap": "^0.45.0",
     "soap-everywhere": "^1.0.7",
+    "sweetalert2": "^11.7.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

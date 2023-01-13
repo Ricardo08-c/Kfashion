@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "../App.css";
 import Plantilla from "../static/Plantilla";
 import React from "react";
+import Swal from "sweetalert2";
 
 // Array donde se almacenaran los productos
 let array = [];
@@ -65,6 +66,15 @@ function Gestion() {
   // Agrega un nuevo producto siempre y cuando se cumplan las validaciones
 
   async function editCategoria() {
+    if (!selects.length) {
+      Swal.fire({
+        title: "Gestión de Categorías",
+        text: "No puedes dejar el campo vacío!",
+        icon: "error",
+      });
+      return;
+    }
+
     let idToRemove;
     for (var i = 0; i < categorias.length; i++) {
       if (selects === categorias[i]["props"]["children"])
@@ -88,13 +98,28 @@ function Gestion() {
       window.alert(error);
       return;
     });
-    window.location.reload();
+    Swal.fire({
+      title: "Gestión de Categorías",
+      text: "El nombre de la categoría fue actualizado con éxito!",
+      icon: "success",
+    }).then(function () {
+      window.location.reload();
+    });
   }
 
   async function removeCategoria() {
     console.log("blabla");
     console.log("ID A REMOVER -> " + selects);
     console.log("ID A REMOVER -> " + JSON.stringify(categorias));
+
+    if (!form.nombreEdicion.length) {
+      Swal.fire({
+        title: "Gestión de Categorías",
+        text: "Selecciona una categoría primero!",
+        icon: "error",
+      });
+      return;
+    }
 
     let idToRemove;
     for (var i = 0; i < categorias.length; i++) {
@@ -114,8 +139,13 @@ function Gestion() {
       window.alert(error);
       return;
     });
-    alert("Categoria removida");
-    window.location.reload();
+    Swal.fire({
+      title: "Gestión de Categorías",
+      text: "La categoría fue removida con éxito!",
+      icon: "success",
+    }).then(function () {
+      window.location.reload();
+    });
   }
 
   async function submitCategoria(e) {
@@ -124,12 +154,20 @@ function Gestion() {
     let user = localStorage.getItem(ip);
 
     if (!user) {
-      alert("Debes iniciar secion como empleado para gestionar categorias");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Debes iniciar sesión como empleado para gestionar categorías",
+      });
       return;
     }
 
     if (!form.nombre.length) {
-      alert("Debes poner una nombre a la categoria");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Debes introducir un nombre a la categoría",
+      });
       return;
     } else {
       const newCategoria = { ...form };
@@ -144,8 +182,13 @@ function Gestion() {
         window.alert(error);
         return;
       });
-      alert("Categoria registrada");
-      window.location.reload();
+      Swal.fire({
+        title: "Gestión de Categorías",
+        text: "La categoría fue ingresada con éxito!",
+        icon: "success",
+      }).then(function () {
+        window.location.reload();
+      });
     }
   }
 

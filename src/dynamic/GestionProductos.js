@@ -3,6 +3,7 @@ import "../App.css";
 import Plantilla from "../static/Plantilla";
 import React from "react";
 import FileBase64 from "react-file-base64";
+import Swal from "sweetalert2";
 // Array donde se almacenaran los productos
 let array = [];
 let categoriasActuales = [];
@@ -46,8 +47,13 @@ class ProductRow extends React.Component {
       window.alert(error);
       return;
     });
-    alert("Producto removido");
-    window.location.reload();
+    Swal.fire({
+      title: "Gestión de Productos",
+      text: "El producto fue removido con éxito!",
+      icon: "success",
+    }).then(function () {
+      window.location.reload();
+    });
   }
 
   // Se capturan los datos del props, si son modificados se envia la peticion
@@ -82,8 +88,13 @@ class ProductRow extends React.Component {
       window.alert(error);
       return;
     });
-    alert("Producto actualizado");
-    window.location.reload();
+    Swal.fire({
+      title: "Gestión de Productos",
+      text: "El producto fue actualizado con éxito!",
+      icon: "success",
+    }).then(function () {
+      window.location.reload();
+    });
   };
 
   // Estas funciones son para actualizar el estado de los inputs
@@ -383,37 +394,65 @@ function Gestion() {
     console.log(form.categoria);
 
     if (!user) {
-      alert("Debes iniciar sesión como empleado para gestionar productos");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Debes iniciar sesión como empleado para gestionar productos",
+      });
       return;
     }
 
     if (!form.nombre.length) {
-      alert("Debes poner un nombre a la producto");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Debes poner un nombre al producto",
+      });
       return;
     }
 
     if (!form.categoria.length) {
-      alert("Debes poner una categoría al producto");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Debes poner una categoría al producto",
+      });
       return;
     }
 
     if (!form.descripcion.length) {
-      alert("Debes poner una descripcion al producto");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Debes poner una descripción al producto",
+      });
       return;
     }
 
     if (!form.precio.length) {
-      alert("Debes asignarle un precio al producto");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Debes asignarle un precio al producto",
+      });
       return;
     }
 
     if (!form.imgSrc.length) {
-      alert("Debes agregarle una imagen del producto");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Debes agregarle una imagen del producto",
+      });
       return;
     }
 
     if (!form.cantidad.length) {
-      alert("Debes poner la cantidad en stock del producto");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Debes poner la cantidad en stock del producto",
+      });
       return;
     } else {
       const newProduct = { ...form };
@@ -430,8 +469,13 @@ function Gestion() {
         window.alert(error);
         return;
       });
-      alert("Producto registrado");
-      window.location.reload();
+      Swal.fire({
+        title: "Gestión de Productos",
+        text: "El producto fue agregado con éxito!",
+        icon: "success",
+      }).then(function () {
+        window.location.reload();
+      });
     }
   }
 

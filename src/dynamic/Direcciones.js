@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "../App.css";
 import Plantilla from "../static/Plantilla";
 import React from "react";
+import Swal from "sweetalert2";
 
 // Array donde se almacenaran los productos
 let array = [];
@@ -42,8 +43,13 @@ class Direccion extends React.Component {
       window.alert(error);
       return;
     });
-    alert("Direccion removida");
-    window.location.reload();
+    Swal.fire({
+      title: "Gestión de Direcciones",
+      text: "La dirección fue removida con éxito!",
+      icon: "success",
+    }).then(function () {
+      window.location.reload();
+    });
   }
 
   // Se capturan los datos del props, si son modificados se envia la peticion
@@ -72,7 +78,13 @@ class Direccion extends React.Component {
       window.alert(error);
       return;
     });
-    window.location.reload();
+    Swal.fire({
+      title: "Gestión de Direcciones",
+      text: "La dirección fue actualizada con éxito!",
+      icon: "success",
+    }).then(function () {
+      window.location.reload();
+    });
   };
 
   changeProvincia = (e) => {
@@ -280,25 +292,45 @@ function Gestion() {
     let user = localStorage.getItem(ip);
 
     if (!user) {
-      alert("Debes iniciar secion como empleado para gestionar categorias");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Debes iniciar sesión como empleado para gestionar categorías",
+      });
       return;
     }
 
     if (!form.provincia.length) {
-      alert("Debes poner una provincia a la dirección");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Debes asignar una provincia a la dirección",
+      });
       return;
     }
 
     if (!form.canton.length) {
-      alert("Debes poner una cantón a la dirección");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Debes asignar un cantón a la dirección",
+      });
       return;
     }
     if (!form.distrito.length) {
-      alert("Debes poner un distrito a la dirección");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Debes asignar un distrito a la dirección",
+      });
       return;
     }
     if (!form.direccion.length) {
-      alert("Debes poner una dirección");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Debes especificar más la dirección",
+      });
       return;
     } else {
       const newDireccion = { ...form };
@@ -313,8 +345,13 @@ function Gestion() {
         window.alert(error);
         return;
       });
-      alert("Dirección registrada");
-      window.location.reload();
+      Swal.fire({
+        title: "Gestión de Direcciones",
+        text: "La dirección fue agregada con éxito!",
+        icon: "success",
+      }).then(function () {
+        window.location.reload();
+      });
     }
   }
 

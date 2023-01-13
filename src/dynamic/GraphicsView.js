@@ -44,15 +44,19 @@ class ReporteC extends React.Component {
 
     this.state = {
       orders: [],
-
+      functionDisplay:this.takeOrdersUser,
       options: {},
       ordersToDisplay: [],
       fechaini: "",
+      labelDisp:[],
       fechafin: "",
       labels: [],
       map: [],
+      products:[]
     };
   }
+
+  mapOrdersByDateAnd
 
   mapOrdersByDate = (canceladas) => {
     let datamap = [];
@@ -95,8 +99,129 @@ class ReporteC extends React.Component {
       true
     );
   };
+countProductsForOrder=()=>{
+  
+  let completeStatus = []
+  
+  this.state.products.forEach(product=>{
+    let map = [];
+    let totalTimesProd = 0
+    this.state.labels.forEach( date=>{
+      let row = [];
+      this.state.orders.forEach(order=>{
+        if(new Date(order.fecha).toLocaleDateString()==date){
+          order.products.forEach(orderProduct=>{
+                        
+            if(orderProduct[0]==product._id){
+              
+              for(let i = 0 ;i < orderProduct[4]; i ++){
+                row.push(product)
+              }
+              totalTimesProd+=orderProduct[4]
+            }
+          })
+        }
+      })    
+      
+      map.push(row)
+    }) 
+    console.log(product.description, totalTimesProd)
+    completeStatus.push({product:product.description,mapper:map, totalProd:totalTimesProd});   
+    
+  })
+
+  return completeStatus;
+}
+  cambiarProducts =async() =>{
+    this.state.labels = this.getLabels();
+    let labels = this.state.labels;
+    
+    let mapsStatus  = this.countProductsForOrder();
+    
+    let datasets = []
+    console.log(mapsStatus)
+    this.state.labelDisp=[]
+    this.state.labelDisp.push(<br></br>)
+    this.state.labelDisp.push(<h5>Información adicional:</h5>)
+    this.state.labelDisp.push(<br></br>)
+    this.state.labelDisp.push(
+    <table className="table table-striped table-light">
+      <thead >
+        <tr>
+          <th scope = "col" className="bg-dark text-white">
+          Total de productos vendidos en el rango de fechas:
+        </th>
+        </tr>
+        
+        
+      </thead>
+      <tbody>
+        {mapsStatus.map( set =>{
+          return(
+        <tr><td scope= "col">{set.product+": "+set.totalProd}</td></tr>
+            )
+        })}
+      
+      </tbody>
+    </table>)
+    
+    mapsStatus.forEach( (set, i) =>{
+      
+
+      
+      
+
+      let rdn = Math.random()*i*10
+      let rdn2 = Math.random() * i*i*100
+      let rdn3 = Math.random() * i*1001
+      let rdn4 = Math.random()
+      
+
+        datasets.push(
+        {label:set.product,
+          data:set.mapper.map(a=>a.length),
+          backgroundColor: `rgba(${rdn2}, ${rdn3},${rdn},1)`
+        })
+
+    })
+    
+
+
+    this.setState({
+      
+      data: { 
+        labels,
+        datasets
+      },
+      options: {
+        responsive: true,
+        onClick: (event, element) => {
+         
+        },
+        plugins: {
+                  
+         
+          title: {
+            display: true,
+            text: "Gráfico de cantidad de productos vendidos por fecha"
+          }
+         
+        },
+      },
+    });
+
+  
+  }
   takeOrdersUser = async () => {
-    let url = "https://kfashionapi.onrender.com/orders";
+    let ulrProducts = "https://kfashionapi.onrender.com/getProductsNoImage"
+    let resProducts = await fetch(ulrProducts);
+    if (resProducts.ok) {
+      let text = await resProducts.json();
+      this.state.products = text;
+      
+    }
+    this.state.labelDisp=[]
+    let url = "https://kfashionapi.onrender.com/simpleOrders";
     let res = await fetch(url);
 
     if (res.ok) {
@@ -107,11 +232,13 @@ class ReporteC extends React.Component {
 
       this.state.orders = text;
 
+
       let dataMap = this.mapOrdersByDate(false);
+      console.log(dataMap)
       let canceledDataMap = this.mapOrdersByDate(true);
 
       this.setState({
-        data: {
+        data: { 
           labels,
           datasets: [
             {
@@ -156,31 +283,62 @@ class ReporteC extends React.Component {
 
   displayDates = (e) => {
     this.state.fechafin = e.target.value;
-    this.takeOrdersUser().then(() => {});
-
     this.forceUpdate();
+    this.state.functionDisplay().then(() => {});
+    
+
+    
   };
   displayDatesStart = (e) => {
     this.state.fechaini = e.target.value;
-    this.takeOrdersUser().then(() => {});
-
     this.forceUpdate();
+    this.state.functionDisplay().then(() => {});
+
+
+    
   };
 
-  render() {
-    this.state.map.push(
-      <Orders
-        oneUser={false}
-        cancel={false}
-        dataToDisplay={this.state.ordersToDisplay}
-      />
-    );
+  
+    
+    setReport=(value)=>{
+      console.log(value)
+      if(value=="PV"){
 
+        this.cambiarProducts().then(()=>{});
+        this.state.functionDisplay = this.cambiarProducts
+        
+      }
+      if(value=="OR"){
+
+        this.takeOrdersUser().then(()=>{});
+        this.state.functionDisplay = this.takeOrdersUser
+        
+      }
+      
+    }
+    render() {
+      this.state.map.push(
+        <Orders
+          oneUser={false}
+          cancel={false}
+          dataToDisplay={this.state.ordersToDisplay}
+        />
+      );
     return (
       <div style={{ minHeight: "85%" }} className=" ">
         {this.state.orders.length !== 0 ? (
           <div style={{ marginLeft: "10%", maxWidth: "80%" }}>
             <br></br>
+            <h2>Visualizar Reportes</h2>
+              <select name="select" 
+              onChange={(e) => this.setReport(e.target.value)}
+
+              className="form-select" style={{ maxWidth: "20%" }}>
+              
+              <option value="OR">Órdenes realizadas</option>
+              <option value="PV">Productos vendidos</option>
+              
+            </select>
 
             <div className="  form-group">
               <label style={{ display: "inline" }} className="" htmlFor="name">
@@ -207,6 +365,8 @@ class ReporteC extends React.Component {
             </div>
 
             <Bar options={this.state.options} data={this.state.data} />
+
+            {this.state.labelDisp}
           </div>
         ) : (
           <></>

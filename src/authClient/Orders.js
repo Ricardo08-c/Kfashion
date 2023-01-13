@@ -190,6 +190,7 @@ class Orders extends React.Component {
           objUser={this.state.orders[i].objUser[0]}
           numFactura={this.state.orders[i].numFactura}
           index={i + 1}
+          id = {this.state.orders[i]._id}
           productsA={prods}
           fecha={date.toLocaleDateString()}
           date={date}
@@ -347,6 +348,7 @@ class Order extends React.Component {
     super(props);
     this.state = {
       date: this.props.date,
+      id : this.props.id,
       productsA: this.props.productsA,
       totalSum: 0,
       dia: this.props.dia,
@@ -401,10 +403,12 @@ class Order extends React.Component {
 
   cancelOnMoticaSide = async () => {
     let json = JSON.stringify({
-      numFactura: this.state.numFactura,
+      id: this.state.id,
       estado: "Cancelada",
       motivo: this.state.motivo,
     });
+    
+    
 
     await fetch("https://kfashionapi.onrender.com/update/order", {
       method: "post",
@@ -416,7 +420,7 @@ class Order extends React.Component {
       window.alert(error);
       return;
     });
-    alert("OrderUpdated");
+    alert("Cancelelado");
     window.location.reload();
   };
 

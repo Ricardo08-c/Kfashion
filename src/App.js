@@ -19,6 +19,7 @@ import CancelarFactura from "./dynamic/CancelarFactura";
 import Reporte from "./dynamic/GraphicsView";
 import DynamicOrder from "./dynamic/dynamicorder";
 import GestionCategorias from "./dynamic/Categorias";
+import GestionDirecciones from "./dynamic/Direcciones";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
           <Route path="/Promociones" element={<GestionPromociones />} />
           <Route path="/Ofertas" element={<GestionOfertas />} />
           <Route path="/Categorias" element={<GestionCategorias />} />
+          <Route path="/Perfil/Direcciones" element={<GestionDirecciones />} />
           <Route path="/" element={<Home />} />
         </Routes>
       </BrowserRouter>

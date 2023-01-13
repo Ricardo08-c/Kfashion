@@ -63,6 +63,9 @@ class ProfileComponent extends React.Component {
             <a href="/Perfil/Editar" class="btn bg-secondary text-dark">
               Editar Perfil
             </a>
+            <a href="/Perfil/Direcciones" class="btn bg-secondary text-dark">
+              Mis direcciones
+            </a>
           </div>
         </div>
       </div>

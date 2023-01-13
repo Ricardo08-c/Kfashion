@@ -227,26 +227,33 @@ function CatalogBuild() {
           </div>
         </form>
         <br></br>
-
-        <div className="row row-cols-1 row-cols-md-2 row-cols-md-3 row-cols-md-4 row-cols-md-5 g-4">
-          {console.log(products)}
-          {console.log(selects)}
-          {products
-            .filter(
-              (product) =>
-                product.props.category === selects ||
-                selects === "Todo el cátalogo" ||
-                selects === undefined
-            )
-            .filter(
-              (product) =>
-                search === undefined ||
-                search === "" ||
-                product.props.name.includes(search) ||
-                product.props.description.includes(search)
-            )
-            .map((filteredProduct) => filteredProduct)}
-        </div>
+        {products.length === 0 ? (
+          <div class="d-flex justify-content-center">
+            <div class="spinner-border" role="status">
+              <span class="sr-only"></span>
+            </div>
+          </div>
+        ) : (
+          <div className="row row-cols-1 row-cols-md-2 row-cols-md-3 row-cols-md-4 row-cols-md-5 g-4">
+            {console.log(products)}
+            {console.log(selects)}
+            {products
+              .filter(
+                (product) =>
+                  product.props.category === selects ||
+                  selects === "Todo el cátalogo" ||
+                  selects === undefined
+              )
+              .filter(
+                (product) =>
+                  search === undefined ||
+                  search === "" ||
+                  product.props.name.includes(search) ||
+                  product.props.description.includes(search)
+              )
+              .map((filteredProduct) => filteredProduct)}
+          </div>
+        )}
       </div>
     </div>
   );

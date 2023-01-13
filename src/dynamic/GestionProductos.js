@@ -82,6 +82,7 @@ class ProductRow extends React.Component {
       window.alert(error);
       return;
     });
+    alert("Producto actualizado");
     window.location.reload();
   };
 
@@ -147,7 +148,7 @@ class ProductRow extends React.Component {
                 <div className="modal-content">
                   <div className="modal-header">
                     <h5 className="modal-title" id="exampleModalLabel">
-                      Edicion de producto
+                      Edición de producto
                     </h5>
                     <button
                       type="button"
@@ -173,7 +174,7 @@ class ProductRow extends React.Component {
                       onChange={this.changePrice}
                     ></input>
                     <br />
-                    <label>Categoria:{this.props.category}</label>
+                    <label>Categoría:{this.props.category}</label>
                     <br />
                     <select
                       className="form-control w-25"
@@ -189,11 +190,13 @@ class ProductRow extends React.Component {
                     <br />
                     <input
                       type="number"
+                      min="1"
+                      max="999"
                       defaultValue={this.props.cantidad}
                       onChange={this.changeQuantity}
                     ></input>
                     <br />
-                    <label>Descripcion</label>
+                    <label>Descripción</label>
                     <br />
                     <input
                       defaultValue={this.props.description}
@@ -241,7 +244,7 @@ class ProductRow extends React.Component {
 
               <h5 className="card-title">{this.props.name}</h5>
               <p className="card-text">{this.props.description}</p>
-              <h5>{"$" + this.props.price}</h5>
+              <h5>{"₡" + this.props.price}</h5>
               <div className="d-grid gap-2 d-md-block">
                 <button
                   type="button"
@@ -380,17 +383,17 @@ function Gestion() {
     console.log(form.categoria);
 
     if (!user) {
-      alert("Debes iniciar secion como empleado para gestionar productos");
+      alert("Debes iniciar sesión como empleado para gestionar productos");
       return;
     }
 
     if (!form.nombre.length) {
-      alert("Debes poner una nombre a la producto");
+      alert("Debes poner un nombre a la producto");
       return;
     }
 
     if (!form.categoria.length) {
-      alert("Debes poner una categoria al producto");
+      alert("Debes poner una categoría al producto");
       return;
     }
 
@@ -434,7 +437,7 @@ function Gestion() {
 
   return (
     <div className="position-relative" style={{ minHeight: "100%" }}>
-      <h2 className="">Gestion de productos</h2>
+      <h2 className="">Gestión de productos</h2>
       <div style={{ overflow: "hidden" }}>
         <form style={{ float: "none" }}>
           <div className="">
@@ -442,37 +445,41 @@ function Gestion() {
             <br />
             <input
               value={form.nombre}
+              className="form-control w-25"
+              style={{ position: "relative", left: "38%" }}
               onChange={(e) => updateForm({ nombre: e.target.value })}
             ></input>
-            <br />
 
-            <label className="">Categoria del producto</label>
+            <label className="">Categoría del producto</label>
             <br />
             <select
               value={selects}
               onChange={(e) => setSelects((form.categoria = e.target.value))}
               className="form-control w-25"
-              style={{ position: "relative", left: "37%" }}
+              style={{ position: "relative", left: "38%" }}
               aria-label="Default select example"
             >
               <option></option>
               {categorias}
             </select>
 
-            <label className="">Descripcion del producto</label>
+            <label className="">Descripción del producto</label>
             <br />
             <input
               value={form.descripcion}
+              className="form-control w-25"
+              style={{ position: "relative", left: "38%" }}
               onChange={(e) => updateForm({ descripcion: e.target.value })}
             ></input>
-            <br />
             <label className="">Precio del producto</label>
-            <br />
             <input
               value={form.precio}
+              className="form-control w-25"
+              style={{ position: "relative", left: "38%" }}
+              type="number"
+              min="1000"
               onChange={(e) => updateForm({ precio: e.target.value })}
             ></input>
-            <br />
             <label className="">Imagen asociada al producto</label>
             <br />
             <FileBase64
@@ -484,6 +491,10 @@ function Gestion() {
             <br />
             <input
               value={form.cantidad}
+              type="number"
+              min="1"
+              max="999"
+              style={{ position: "relative", left: "-0%" }}
               onChange={(e) => updateForm({ cantidad: e.target.value })}
             ></input>
             <br />
@@ -548,7 +559,7 @@ function Gestion() {
       </button>
       <br />
       <br></br>
-      <h2 className="">Bùsqueda por nombre</h2>
+      <h2 className="">Búsqueda por nombre</h2>
       <input type="text" onChange={handleChange}></input>
       <div style={{ minHeight: "100%" }} className="m-4">
         <br></br>

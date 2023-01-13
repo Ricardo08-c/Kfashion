@@ -43,7 +43,7 @@ class Direccion extends React.Component {
       return;
     });
     alert("Direccion removida");
-    //window.location.reload();
+    window.location.reload();
   }
 
   // Se capturan los datos del props, si son modificados se envia la peticion
@@ -72,7 +72,7 @@ class Direccion extends React.Component {
       window.alert(error);
       return;
     });
-    //window.location.reload();
+    window.location.reload();
   };
 
   changeProvincia = (e) => {
@@ -287,10 +287,23 @@ function Gestion() {
     if (!form.provincia.length) {
       alert("Debes poner una provincia a la dirección");
       return;
+    }
+
+    if (!form.canton.length) {
+      alert("Debes poner una cantón a la dirección");
+      return;
+    }
+    if (!form.distrito.length) {
+      alert("Debes poner un distrito a la dirección");
+      return;
+    }
+    if (!form.direccion.length) {
+      alert("Debes poner una dirección");
+      return;
     } else {
       const newDireccion = { ...form };
       console.log(JSON.stringify(newDireccion));
-      await fetch("https://kfashionapi.onrender.com//register/direccion", {
+      await fetch("https://kfashionapi.onrender.com/register/direccion", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

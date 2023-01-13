@@ -151,11 +151,11 @@ function Gestion() {
 
   return (
     <div className="position-relative" style={{ minHeight: "100%" }}>
-      <h2 className="">Gestion de categorias</h2>
+      <h2 className="">Gestión de categorías</h2>
       <div style={{ overflow: "hidden" }}>
         <form style={{ float: "none" }}>
           <div className="">
-            <label className="">Nombre de la categoria</label>
+            <label className="">Nombre de la categoría</label>
             <br />
             <input
               value={form.nombre}
@@ -167,11 +167,11 @@ function Gestion() {
       </div>
       <br />
       <button onClick={submitCategoria} type="submit" className="btn btn-dark">
-        Agregar Categoria
+        Agregar Categoría
       </button>
       <br />
       <br />
-      <label>Editar categoria</label>
+      <label>Editar categoría</label>
       <select
         value={selects}
         onChange={(e) => setSelects((form.nombreEdicion = e.target.value))}
@@ -198,7 +198,7 @@ function Gestion() {
         type="submit"
         className="btn btn-danger"
       >
-        Eliminar Categoria
+        Eliminar Categoría
       </button>
       <br></br>
     </div>

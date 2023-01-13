@@ -366,11 +366,11 @@ function Gestion() {
 
   return (
     <div className="position-relative" style={{ minHeight: "100%" }}>
-      <h2 className="">Gestion de promociones</h2>
+      <h2 className="">Gestión de promociones</h2>
       <div style={{ overflow: "hidden" }}>
         <form style={{ float: "none" }}>
           <div className="">
-            <label className="">Descripcion de la promocion</label>
+            <label className="">Descripción de la promoción</label>
             <br />
             <input
               value={form.descripcion}
@@ -405,6 +405,9 @@ function Gestion() {
             <label className="">Porcentaje</label>
             <br />
             <input
+              type="number"
+              min="1"
+              max="99"
               value={form.porcentaje}
               onChange={(e) => updateForm({ porcentaje: e.target.value })}
             ></input>

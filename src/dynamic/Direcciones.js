@@ -6,6 +6,80 @@ import Swal from "sweetalert2";
 
 // Array donde se almacenaran los productos
 let array = [];
+/*
+let cantonesSanjose = [
+  <option>San José</option>,
+  <option>Escazú</option>,
+  <option>Desamparados</option>,
+  <option>Puriscal</option>,
+  <option>Tarrazú</option>,
+  <option>Aserrí</option>,
+  <option>Mora</option>,
+  <option>Goicochea</option>,
+  <option>Santa Ana</option>,
+  <option>Alajuelita</option>,
+  <option>Vásquez de Coronado</option>,
+  <option>Acosta</option>,
+  <option>Tibás</option>,
+  <option>Moravia</option>,
+  <option>Montes de Oca</option>,
+  <option>Turrubares</option>,
+  <option>Dota</option>,
+  <option>Curridabat</option>,
+  <option>Peréz Zeledón</option>,
+  <option>León Cortés Castro</option>,
+];
+
+let cantonesAlajuela = [
+  <option>Alajuela</option>,
+  <option>San Ramón</option>,
+  <option>Grecia</option>,
+  <option>San Mateo</option>,
+  <option>Atenas</option>,
+  <option>Naranjo</option>,
+  <option>Palmarés</option>,
+  <option>Poás</option>,
+  <option>Orotina</option>,
+  <option>San Carlos</option>,
+  <option>Zarcero</option>,
+  <option>Sarchí</option>,
+  <option>Upala</option>,
+  <option>Los Chiles</option>,
+  <option>Guatuso</option>,
+  <option>Río Cuarto</option>,
+];
+
+let cantonesCartago = [
+  <option>Cartago</option>,
+  <option>Paraíso</option>,
+  <option>La Unión</option>,
+  <option>Jiménez</option>,
+  <option>Turrialba</option>,
+  <option>Alvarado</option>,
+  <option>Oreamuno</option>,
+  <option>El Guarco</option>,
+];
+
+let cantonesHeredia = [
+  <option>Heredia</option>,
+  <option>Barva</option>,
+  <option>Santo Domingo</option>,
+  <option>Santa Bárbara</option>,
+  <option>San Rafael</option>,
+  <option>San Isidro</option>,
+  <option>Belén</option>,
+  <option>Flores</option>,
+  <option>San Pablo</option>,
+  <option>Sarapiquí</option>,
+];
+
+let cantonesGuanacaste = [<option>Heredia</option>];
+
+let cantonesPuntarenas = [<option>Heredia</option>];
+
+let cantonesLimon = [<option>Heredia</option>];
+
+*/
 
 class Direccion extends React.Component {
   constructor(props) {
@@ -120,7 +194,7 @@ class Direccion extends React.Component {
               <div className="modal-content">
                 <div className="modal-header">
                   <h5 className="modal-title" id="exampleModalLabel">
-                    Edicion de direccion
+                    Edición de dirección
                   </h5>
                   <button
                     type="button"
@@ -151,7 +225,7 @@ class Direccion extends React.Component {
                     onChange={this.changeDistrito}
                   ></input>
                   <br />
-                  <label>Direccion</label>
+                  <label>Dirección</label>
                   <br />
                   <input
                     defaultValue={this.props.direccion}

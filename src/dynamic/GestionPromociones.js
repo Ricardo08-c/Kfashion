@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "../App.css";
 import Plantilla from "../static/Plantilla";
 import React from "react";
+import Swal from "sweetalert2";
 
 // Arreglo donde se almacena temporalmentelas promos
 let array = [];
@@ -31,7 +32,11 @@ class BannerComponent extends React.Component {
   // Remueve una promocion por el id asignado a la promo en cada banner
 
   removeFromDatabase(idToRemove) {
-    let json = JSON.stringify({ _id: idToRemove });
+    console.log(this.state.producto._id);
+    let json = JSON.stringify({
+      _id: idToRemove,
+      producto: this.state.producto._id,
+    });
     console.log(json);
     fetch("https://kfashionapi.onrender.com/remove/promotion", {
       method: "delete",
@@ -43,8 +48,13 @@ class BannerComponent extends React.Component {
       window.alert(error);
       return;
     });
-    alert("Promocion removida");
-    window.location.reload();
+    Swal.fire({
+      title: "Gestión de Promociones",
+      text: "La promoción fue removida con éxito!",
+      icon: "success",
+    }).then(function () {
+      window.location.reload();
+    });
   }
 
   // Actualiza una promocion siempre y cuando hayan hecho cambios.
@@ -74,8 +84,13 @@ class BannerComponent extends React.Component {
       window.alert(error);
       return;
     });
-    alert("Promocion actualizada");
-    window.location.reload();
+    Swal.fire({
+      title: "Gestión de Promociones",
+      text: "La promoción fue actualizada con éxito!",
+      icon: "success",
+    }).then(function () {
+      window.location.reload();
+    });
   };
 
   // Funciones para actualizar el state.
@@ -132,7 +147,7 @@ class BannerComponent extends React.Component {
               <div className="modal-content">
                 <div className="modal-header">
                   <h5 className="modal-title" id="exampleModalLabel">
-                    Edicion de producto
+                    Edición de promoción
                   </h5>
                   <button
                     type="button"
@@ -142,9 +157,12 @@ class BannerComponent extends React.Component {
                   ></button>
                 </div>
                 <div className="modal-body">
-                  <label>Descripcion:{this.props.descripcion}</label>
+                  <label>Descripción</label>
                   <br />
-                  <input onChange={this.changeDescripcion}></input>
+                  <input
+                    defaultValue={this.props.descripcion}
+                    onChange={this.changeDescripcion}
+                  ></input>
                   <br />
                   <label>Fecha Inicio:{this.props.fechaInicio}</label>
                   <br />
@@ -156,7 +174,12 @@ class BannerComponent extends React.Component {
                   <br />
                   <label>Porcentaje:{this.props.porcentaje}</label>
                   <br />
-                  <input onChange={this.changePorcentaje}></input>
+                  <input
+                    type="number"
+                    min="1"
+                    max="99"
+                    onChange={this.changePorcentaje}
+                  ></input>
                   <br />
                 </div>
                 <div className="modal-footer">
@@ -289,32 +312,56 @@ function Gestion() {
     let user = localStorage.getItem(ip);
 
     if (!user) {
-      alert("Debes iniciar secion como empleado para gestionar productos");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Debes iniciar sesión como empleado para gestionar promociones",
+      });
       return;
     }
 
     if (!form.descripcion.length) {
-      alert("Debes poner una descripcion a la promocion");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Debes poner una descripción a la promoción",
+      });
       return;
     }
 
     if (!form.fechaInicio.length) {
-      alert("Debes poner una fecha inicial a la promocion");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Debes poner una fecha inicial a la promoción",
+      });
       return;
     }
 
     if (!form.fechaFinal.length) {
-      alert("Debes poner una fecha final a la promocion");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Debes poner una fecha final a la promoción",
+      });
       return;
     }
 
     if (!form.producto.length) {
-      alert("Debes asignarle un producto a la promocion");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Debes asignarle un producto a la promoción",
+      });
       return;
     }
 
     if (!form.porcentaje.length) {
-      alert("Debes poner un porcentaje a la promocion");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Debes poner asignarle un porcentaje de descuento a la promoción",
+      });
       return;
     } else {
       const newPromo = { ...form };
@@ -331,8 +378,13 @@ function Gestion() {
         return;
       });
 
-      alert("Promocion registrada");
-      window.location.reload();
+      Swal.fire({
+        title: "Gestión de Promociones",
+        text: "La promoción fue agregada con éxito!",
+        icon: "success",
+      }).then(function () {
+        window.location.reload();
+      });
     }
   }
 

@@ -410,7 +410,6 @@ class Carrito extends React.Component {
 
   confirmOrder = () => {
     console.log(this.state.direccionSeleccionada);
-    return;
 
     addToCart(this.state.totalSum).then(
       alert(

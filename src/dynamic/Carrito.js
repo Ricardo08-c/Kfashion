@@ -1,9 +1,11 @@
 import React from "react";
 import "../App.css";
-
 import Plantilla from "../static/Plantilla";
 import emailjs from "@emailjs/browser";
+import { useEffect, useState } from "react";
+
 let array = [];
+let array3 = [];
 
 class CatalogComponent extends React.Component {
   constructor(props) {
@@ -20,7 +22,7 @@ class CatalogComponent extends React.Component {
       functionAlter: this.props.functionAlter,
       editable: this.props.editable,
       descuento: this.props.descuento,
-      insertedId :""
+      insertedId: "",
     };
   }
 
@@ -107,13 +109,19 @@ class CatalogComponent extends React.Component {
             >
               -
             </button>
-            <li style={{ opacity:0, display: "inline" }} className="text-white">
+            <li
+              style={{ opacity: 0, display: "inline" }}
+              className="text-white"
+            >
               --
             </li>
 
             {this.props.cantidad}
 
-            <li style={{ opacity:0,display: "inline" }} className="text-white">
+            <li
+              style={{ opacity: 0, display: "inline" }}
+              className="text-white"
+            >
               --
             </li>
             <button
@@ -159,6 +167,39 @@ function RegistrarVenta(newOrder) {
   });
 }
 
+async function getDirecciones() {
+  let url = "https://kfashionapi.onrender.com/get/direcciones";
+  let res = await fetch(url);
+
+  let user = localStorage.getItem(localStorage.getItem("ipAdress")) || false;
+  let userobj = JSON.parse(user);
+  console.log(userobj._id);
+
+  if (res.ok) {
+    let text = await res.json();
+    array = [];
+    array.push(text);
+  } else {
+    console.log(`HTTP error: ${res.status}`);
+  }
+
+  let array2 = [];
+  let array1 = array[0];
+  console.log(array1);
+
+  for (let i = 0; i < array1.length; i++) {
+    let datos = array1[i];
+    if (userobj._id === datos.usuario) {
+      array2.push(
+        <option>
+          {datos.provincia},{datos.canton},{datos.distrito},{datos.direccion}
+        </option>
+      );
+    }
+  }
+  array3 = array2;
+}
+
 async function addToCart(subtotal) {
   let user = localStorage.getItem(localStorage.getItem("ipAdress")) || false;
   let userobj = JSON.parse(user);
@@ -194,9 +235,8 @@ async function addToCart(subtotal) {
     ]);
   }
 
-  
   console.log("asddas");
-  
+
   let total = subtotal + subtotal * (13 / 100); //SE LE APLICA EL IVA
   let newOrder2 = {
     user: userobj._id,
@@ -207,12 +247,9 @@ async function addToCart(subtotal) {
 
   // Registrar factura electronica
 
-  
   console.log(listaItems);
 
   console.log("order:", newOrder2);
-  
-
 
   let res = await fetch("https://kfashionapi.onrender.com/register/order2", {
     method: "POST",
@@ -224,30 +261,30 @@ async function addToCart(subtotal) {
     window.alert(error);
     return;
   });
-  if(res.ok){
-    let data = await res.json()
-    console.log(data)
+  if (res.ok) {
+    let data = await res.json();
+    console.log(data);
     let insertedId = data.insertedId;
-    
-      //Estableciendo los atributos del formulario
-      
-  
-      //Envío del email
-     
-      let form =  {nombre:userobj.nombre,link:window.location.origin+"/"+"DynamicOrder:"+insertedId};
-      emailjs
+
+    //Estableciendo los atributos del formulario
+
+    //Envío del email
+
+    let form = {
+      nombre: userobj.nombre,
+      link: window.location.origin + "/" + "DynamicOrder:" + insertedId,
+    };
+    emailjs
       .send("service_rqo4y0f", "template_1e147vw", form, "OgiARypVGqnVEZeLu")
-        
-        .then((response) => {
-          window.location.reload()
-          return console.log(response);
-        })
-        .catch((error) =>
+
+      .then((response) => {
+        window.location.reload();
+        return console.log(response);
+      })
+      .catch((error) =>
         alert("error en el envío, verifique los datos y conexión")
-        );
-    }
-    
-  
+      );
+  }
 }
 
 class Carrito extends React.Component {
@@ -260,42 +297,35 @@ class Carrito extends React.Component {
       checked: false,
       checkedServ: false,
       editable: this.props.editable,
-      productsLoaded:[]
+      productsLoaded: [],
+      direccionSeleccionada: "",
     };
     this.change();
   }
-  
 
-  productsFetcher= async () =>{
+  productsFetcher = async () => {
     let url = "https://kfashionapi.onrender.com/products";
     let res = await fetch(url);
-    
+
     if (res.ok) {
       let text = await res.json();
 
       //let userQuery = [];
-      
-      
-      
-      
-        this.setState({ productsLoaded: text });
-      
+
+      this.setState({ productsLoaded: text });
 
       //buscar si hay una contraseña y el correo igual;
     } else {
       return `HTTP error: ${res.status}`;
     }
-  
-
-  }
-  getImageSource=(id)=>{
-      for(let i = 0 ; i < this.state.productsLoaded.length; i ++){
-        if(this.state.productsLoaded[i]._id==id){
-          return this.state.productsLoaded[i].imgSrc;
-        }
-
+  };
+  getImageSource = (id) => {
+    for (let i = 0; i < this.state.productsLoaded.length; i++) {
+      if (this.state.productsLoaded[i]._id == id) {
+        return this.state.productsLoaded[i].imgSrc;
       }
-  }
+    }
+  };
 
   productsToCart = () => {
     let k = [];
@@ -340,7 +370,6 @@ class Carrito extends React.Component {
     let products = JSON.parse(localStorage.getItem("Products")) || [];
     this.setState({ productsA: products });
 
-
     let sum = 0;
 
     for (let i = 0; i < products.length; i++) {
@@ -366,8 +395,7 @@ class Carrito extends React.Component {
     if (JSON.stringify(products) !== JSON.stringify(this.state.productsA)) {
       this.setState({ productsA: products });
     }
-    this.productsFetcher().then(()=>{});
-    
+    this.productsFetcher().then(() => {});
   }
   authorizeCart = () => {
     let user = localStorage.getItem(localStorage.getItem("ipAdress")) || false;
@@ -379,35 +407,38 @@ class Carrito extends React.Component {
     }
     this.setState({ cartConfirmed: !this.state.cartConfirmed });
   };
-   
+
   confirmOrder = () => {
+    console.log(this.state.direccionSeleccionada);
+    return;
+
     addToCart(this.state.totalSum).then(
       alert(
         "Tu orden se ha registrado correctamente",
         this.setState({ cartConfirmed: !this.state.cartConfirmed }),
-        localStorage.removeItem("Products"),        
+        localStorage.removeItem("Products")
       )
     );
-    this.submit().then(()=>{})
+    this.submit().then(() => {});
     ///window.location.reload();
   };
   handleChangeOrder = (e) => {
-    if(!this.state.checked){
-      this.state.totalSum+=4500;
-
+    if (!this.state.checked) {
+      this.state.totalSum += 4500;
     } else {
-      this.state.totalSum-=4500
+      this.state.totalSum -= 4500;
     }
     this.setState({ checked: !this.state.checked, checkedServ: false });
   };
   handleChangeOrder1 = (e) => {
-    if(this.state.checked){
-      this.state.totalSum-=4500;
+    if (this.state.checked) {
+      this.state.totalSum -= 4500;
     }
     this.setState({ checkedServ: !this.state.checkedServ, checked: false });
   };
   render() {
     let editable = this.state.editable || true;
+    getDirecciones();
     return (
       <Plantilla
         sectionToDisplay={
@@ -427,9 +458,7 @@ class Carrito extends React.Component {
                         <th scope="col">Descripcion</th>
                         <th scope="col">Precio unitario</th>
                         <th scope="col">Cantidad</th>
-                        <th  scope="col">
-                          Descuento
-                        </th>
+                        <th scope="col">Descuento</th>
                         <th scope="col">Total de precios unitarios</th>
                       </tr>
                     </thead>
@@ -437,7 +466,7 @@ class Carrito extends React.Component {
                     <tbody>
                       {this.productsToCart().map((data) => data)}
 
-                      <tr scope = "row">
+                      <tr scope="row">
                         <td></td>
                         <td></td>
                         <td></td>
@@ -484,7 +513,32 @@ class Carrito extends React.Component {
                             </tbody>
                           </table>
                         </div>
+                        <br></br>
 
+                        {console.log(array3)}
+
+                        <br></br>
+                        {this.state.checked ? (
+                          <div>
+                            <label>Tus direcciones</label>
+                            <select
+                              value={this.state.direccionSeleccionada}
+                              onChange={(e) =>
+                                this.setState({
+                                  direccionSeleccionada: e.target.value,
+                                })
+                              }
+                              className="form-control w-50"
+                              style={{ position: "relative", left: "27%" }}
+                            >
+                              <option></option>
+                              {array3}
+                            </select>
+                          </div>
+                        ) : (
+                          <div></div>
+                        )}
+                        <br></br>
                         <button
                           style={{ display: "inline" }}
                           onClick={this.authorizeCart}

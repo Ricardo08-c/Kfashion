@@ -60,13 +60,14 @@ class PyRcomponent extends React.Component {
     let user = localStorage.getItem(ip);
     let userobj = JSON.parse(user);
     
+    
     return (
       <div className="col">
         <div className="card">
           <div className="card-body">
             <h5 className="card-title">{this.props.usuarioPregunta + ":"}</h5>
             <p className="card-text">{this.props.pregunta}</p>
-            {this.state.respuesta === "No contestada"  && userobj.rol=='EMP'?(
+            {this.state.respuesta === "No contestada"  && userobj!=undefined && userobj.rol=='EMP'?(
               <div>
                 <button
                   onClick={this.submitAnswer}
@@ -75,7 +76,7 @@ class PyRcomponent extends React.Component {
                   Responder
                 </button>
                 <li className="text-white">-</li>
-                { userobj.rol=='EMP'?
+                { userobj!= undefined && userobj.rol=='EMP'?
                 
                 <button
                 
@@ -103,7 +104,7 @@ class PyRcomponent extends React.Component {
 
                 
                
-                { userobj.rol=='EMP'?
+                { userobj!= undefined && userobj.rol=='EMP'?
                 <div>
                   <input
                   value={this.state.respuestaInput}

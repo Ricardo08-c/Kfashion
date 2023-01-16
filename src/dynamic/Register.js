@@ -11,7 +11,7 @@ function Facturacion1() {
     contrasenha: "",
     cedula: "",
     sexo: "M",
-    rol: "EMP",
+    rol: "CL",
   });
   const navigate = useNavigate();
 
@@ -66,7 +66,7 @@ function Facturacion1() {
       contrasenha: "",
       cedula: "",
       sexo: "M",
-      rol: "EMP",
+      rol: "CL",
     });
     navigate("/");
   }
@@ -179,19 +179,7 @@ function Facturacion1() {
             onChange={(e) => updateForm({ contrasenha: e.target.value })}
           />
         </div>
-        <div className="form-group">
-          <label className="" htmlFor="name">
-            Rol
-          </label>
-          <select
-            className="form-select"
-            value={form.rol}
-            onChange={(e) => updateForm({ rol: e.target.value })}
-          >
-            <option value="EMP">Empresa</option>
-            <option value="CL">Cliente</option>
-          </select>
-        </div>
+        
         <br></br>
         <button className="btn  btn-outline-secondary" onClick={onSubmit}>
           Registrar

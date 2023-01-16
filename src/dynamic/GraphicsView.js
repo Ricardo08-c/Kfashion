@@ -125,7 +125,7 @@ countProductsForOrder=()=>{
       
       map.push(row)
     }) 
-    console.log(product.description, totalTimesProd)
+    
     completeStatus.push({product:product.description,mapper:map, totalProd:totalTimesProd});   
     
   })
@@ -184,9 +184,6 @@ countProductsForOrder=()=>{
         })
 
     })
-    
-
-
     this.setState({
       
       data: { 
@@ -242,13 +239,13 @@ countProductsForOrder=()=>{
           labels,
           datasets: [
             {
-              label: "Cantidad de ventas por fecha",
+              label: "Cantidad de órdenes por fecha",
               data: dataMap.map((a, i) => dataMap[i].length),
               backgroundColor: "rgba(53, 162, 235, 0.5)",
             },
 
             {
-              label: "Cantidad de ventas canceladas por fecha",
+              label: "Canceladas",
               data: canceledDataMap.map((a, i) => canceledDataMap[i].length),
               backgroundColor: "rgba(207, 0, 15, 0.5)",
             },

@@ -75,7 +75,7 @@ class Orders extends React.Component {
             if (this.state.oldOrders[j].estado === "Cancelada") {
               row.push(this.state.orders[j]);
             }
-          } else if (this.state.oldOrders[j].estado === "Facturado") {
+          } else  {
             row.push(this.state.oldOrders[j]);
           }
         }
@@ -403,7 +403,7 @@ class Order extends React.Component {
 
   cancelOnMoticaSide = async () => {
     let json = JSON.stringify({
-      id: this.state.id,
+      id: this.props.id,
       estado: "Cancelada",
       motivo: this.state.motivo,
     });
@@ -420,7 +420,7 @@ class Order extends React.Component {
       window.alert(error);
       return;
     });
-    alert("Cancelelado");
+    alert("Cancelado");
     window.location.reload();
   };
 

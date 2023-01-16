@@ -200,7 +200,7 @@ async function getDirecciones() {
   array3 = array2;
 }
 
-async function addToCart(subtotal) {
+async function addToCart(subtotal,direccion) {
   let user = localStorage.getItem(localStorage.getItem("ipAdress")) || false;
   let userobj = JSON.parse(user);
   let products = JSON.parse(localStorage.getItem("Products")) || [];
@@ -250,6 +250,14 @@ async function addToCart(subtotal) {
   console.log(listaItems);
 
   console.log("order:", newOrder2);
+  let msg=""
+  if(direccion==""){
+    msg+="Método de entrega: Recoger en la tienda"
+  } else {
+    msg+="Método de entrega: Express."+"\n Dirección: "+direccion;
+  }
+  
+  
 
   let res = await fetch("https://kfashionapi.onrender.com/register/order2", {
     method: "POST",
@@ -269,10 +277,12 @@ async function addToCart(subtotal) {
     //Estableciendo los atributos del formulario
 
     //Envío del email
-
+   
     let form = {
-      nombre: userobj.nombre,
+
+      nombre: userobj.nombre,     
       link: window.location.origin + "/" + "DynamicOrder:" + insertedId,
+      direccion: msg
     };
     emailjs
       .send("service_rqo4y0f", "template_1e147vw", form, "OgiARypVGqnVEZeLu")
@@ -411,7 +421,7 @@ class Carrito extends React.Component {
   confirmOrder = () => {
     console.log(this.state.direccionSeleccionada);
 
-    addToCart(this.state.totalSum).then(
+    addToCart(this.state.totalSum,this.state.direccionSeleccionada).then(
       alert(
         "Tu orden se ha registrado correctamente",
         this.setState({ cartConfirmed: !this.state.cartConfirmed }),

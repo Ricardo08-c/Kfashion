@@ -216,11 +216,7 @@ class BannerComponent extends React.Component {
                   {this.props.fechaInicio} hasta el {this.props.fechaFinal}
                 </p>
               </div>
-              <div className="botonBanner">
-                <a href="/Catalogo" className="btn btn-secondary tamanho">
-                  Añadir al carrito
-                </a>
-              </div>
+             
             </div>
             <button
               type="button"

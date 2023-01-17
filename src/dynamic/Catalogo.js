@@ -115,7 +115,7 @@ class CatalogComponent extends React.Component {
               <h5>{"₡" + this.props.price}</h5>
             )}
 
-            <button onClick={this.addToCart} className="btn btn-secondary">
+            <button onClick={this.addToCart} className="btn btn-primary">
               Añadir al carrito
             </button>
           </div>

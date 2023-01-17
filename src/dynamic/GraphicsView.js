@@ -253,13 +253,7 @@ countProductsForOrder=()=>{
         },
         options: {
           responsive: true,
-          onClick: (event, element) => {
-            if (element[0].datasetIndex === 0) {
-              this.setOrdersToDisplay(dataMap[element[0].index]);
-            } else {
-              this.setOrdersToDisplay(canceledDataMap[element[0].index]);
-            }
-          },
+          
           plugins: {
             legend: {
               position: "top",

@@ -1,6 +1,6 @@
 import React from "react";
 import "../App.css";
-import houseImgPath from "../img/logo.png";
+import houseImgPath from "../img/intento.jpeg";
 import carrito from "../img/cart.svg";
 import userIcon from "../img/userIcon.svg";
 import menuIcon from "../img/icons8-menu.svg";
@@ -121,8 +121,7 @@ class Plantilla extends React.Component {
               <li style={{ opacity: 0 }}>-</li>
               <li className="navbar-item">
                 <a href="/" className="navbar-brand text-dark">
-                  <img src={houseImgPath} width="30" height="30" alt="logo" />{" "}
-                  Kfashion
+                  <img src={houseImgPath} width="75" height="75" alt="logo" />{" "}
                 </a>
               </li>
             </ul>

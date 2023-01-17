@@ -2,7 +2,8 @@
   "projects": {
     "default": "motica-dfa2b",
     "MoticaServer": "moticadb",
-    "Motica": "motica-dfa2b"
+    "Motica": "motica-dfa2b",
+    "kfashion": "kfashionhosting"
   },
   "targets": {},
   "etags": {}

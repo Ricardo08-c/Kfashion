@@ -14,8 +14,9 @@
 }
 
 .bannerAgrupacion{
-  background-image: url("img/bann.jpeg");
+  background-image: url("img/banner.jpeg");
   background-position: 50%;
+  background-size: cover;
   height: 50%;
   width: 100%;
   box-sizing: border-box;
@@ -107,7 +108,7 @@
   text-align: left;
   margin-left: 5%;
   font-weight: bolder;
-  color: white;
+  color: rgb(65,45,61);
   box-sizing: border-box;
   flex: 5;
   height: 20vh;
@@ -154,7 +155,7 @@
 }
 .backgroundNavbar {
   
-  background:rgb(250,241,204);
+  background:rgba(235,206,226,255)
   
 }
 
@@ -233,7 +234,7 @@
 }
 
 .color-nav {
-	background-color: rgb(196,173,160);
+	background-color: rgba(136,123,149,255);
   }
 .centrado{
   position: relative;

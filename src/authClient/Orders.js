@@ -56,7 +56,8 @@ class Orders extends React.Component {
       fechafin:"",
       selects: "Todas",
       labels: [],
-      oldOrders:[]
+      oldOrders:[],
+      statusOk:false
     };
   }
 
@@ -223,12 +224,13 @@ class Orders extends React.Component {
           return orders.user === userId._id;
         });
         
-        this.setState({ orders: filteredOrder,oldOrders:text });
+        this.setState({ orders: filteredOrder,oldOrders:filteredOrder });
       } else {       
         this.setState({ orders: text, oldOrders:text });
       }
 
       //buscar si hay una contraseña y el correo igual;
+      this.state.statusOk = true;
     } else {
       return `HTTP error: ${res.status}`;
     }
@@ -245,7 +247,13 @@ class Orders extends React.Component {
   render() {
     let order1 = this.orders();
     
+    let msgLoad = "Cargando...";
     
+    if(this.state.statusOk){
+      if(this.state.orders.length==0 && this.props.dataToDisplay.length<0){
+        msgLoad = "No tienes órdenes realizadas"
+      }
+    }
     
     return (
       <div style={{ minHeight: "86%" }} className=" text-dark position-relative">
@@ -335,9 +343,10 @@ class Orders extends React.Component {
                 </div>
               ))}
           </div>
-        ) : (
-          <h2 className="">Cargando...</h2>
-        )}
+        ) : 
+        
+          <h2 className="">{msgLoad}</h2>
+        }
       </div>
     );
   }

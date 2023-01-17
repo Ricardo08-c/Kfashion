@@ -204,6 +204,10 @@ function CatalogBuild() {
       alert("Debes iniciar sesión para realizar una pregunta");
       return;
     }
+    if(form.pregunta==""){
+      alert("La pregunta no puede estar vacía");
+      return;
+    }
 
     let newQuestion = {
       contenido: form.pregunta,

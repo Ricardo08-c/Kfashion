@@ -325,8 +325,16 @@ class Orders extends React.Component {
                           {"Usuario que realiza la orden: " +
                             filteredOrder.props.objUser.nombre +
                             " " +
-                            filteredOrder.props.objUser.apellido}
+                            filteredOrder.props.objUser.apellido}                           
+                            
                         </h5>
+                        <h5 className="">
+                          {"Correo: " +
+                            filteredOrder.props.objUser.correo
+                          }
+                            
+                        </h5>
+
                       </div>
                     ) : (
                       <div></div>
@@ -400,6 +408,7 @@ class Order extends React.Component {
           id={datos.id}
           imgSrc={datos.imgSrc}
           name={datos.nombre}
+          correo = {datos.correo}
           price={precio}
           description={datos.description}
           category={datos.category}

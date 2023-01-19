@@ -234,6 +234,7 @@ class Orders extends React.Component {
     } else {
       return `HTTP error: ${res.status}`;
     }
+    
   };
   filterByName = (e)=>{
     let val = e.target.value;
@@ -250,10 +251,11 @@ class Orders extends React.Component {
     let msgLoad = "Cargando...";
     
     if(this.state.statusOk){
-      if(this.state.orders.length==0 && this.props.dataToDisplay.length<0){
+      if(this.state.orders.length==0 && !this.props.dataToDisplay ){
         msgLoad = "No tienes órdenes realizadas"
       }
     }
+    
     
     return (
       <div style={{ minHeight: "86%" }} className=" text-dark position-relative">

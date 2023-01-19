@@ -25,7 +25,7 @@ function FormContacto() {
 
     //Envío del email
     emailjs
-      .send("service_rqo4y0f", "template_1e147vw", form, "OgiARypVGqnVEZeLu")
+      .send("service_rqo4y0f", "template_bh8z0v8", form, "OgiARypVGqnVEZeLu")
       .then((response) => {
         alert(
           "Su mensaje ha sido enviado con éxito, nuestro servicio al cliente se pondrá en contacto con usted al correo suministrado"
